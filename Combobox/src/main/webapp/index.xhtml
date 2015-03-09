@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <b:container>
+            <b:row>
+                <b:column col-lg="6" offset-lg="3" >
+                    <h:form prependId="false">
+                        <b:panel look="success" title="BootsFaces Combobox demo">
+                            <b:selectOneMenu value="#{exampleBean.word}">
+                                <f:selectItems value="#{exampleBean.words}" var="wordVar" itemLabel="#{wordVar}" itemValue="#{wordVar}"/>
+                            </b:selectOneMenu>
+                        </b:panel>
+                    </h:form>
+                </b:column>
+            </b:row>
+        </b:container>
+    </h:body>
+</html>
