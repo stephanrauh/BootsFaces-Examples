@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core" xmlns:prime="http://primefaces.org/ui">
+
+<h:head>
+    <style>
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+	{
+	background-color: #ddd !important;
+}
+</style>
+</h:head>
+<h:body>
+    <b:container >
+        <b:tabView>
+            <b:tab title="PrimeFaces" addLabels="false" addMessages="false">
+        <b:panel title="Contact information" look="info">
+            <h:form prependId="false" >
+                <b:panelGrid colSpans="2,3,7" size="xs">
+                    <prime:outputLabel value="First name" for="@next" />
+                    <prime:inputText value="#{person.firstName}" />
+                    <prime:message for="@previous" />
+                    <prime:outputLabel value="Last name" for="@next" />
+                    <prime:inputText value="#{person.lastName}" />
+                    <prime:message for="@previous" />
+                    <prime:outputLabel value="Birthdate" for="@next" />
+                    <prime:calendar value="#{person.birthdate}" />
+                    <prime:message for="@previous" />
+                </b:panelGrid>
+            </h:form>
+        </b:panel>
+        </b:tab>
+        <b:tab title="PrimeFaces + AngularFaces">
+        <b:panel title="Contact information" look="info">
+            <h:form prependId="false" >
+                <b:panelGrid colSpans="2,3,7" size="xs">
+                    <prime:inputText value="#{person.firstName}" />
+                    <prime:inputText value="#{person.lastName}" />
+                    <prime:calendar value="#{person.birthdate}" />
+                </b:panelGrid>
+            </h:form>
+        </b:panel>
+        </b:tab>
+        </b:tabView>
+    </b:container>
+</h:body>
+</html>

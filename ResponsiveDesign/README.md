@@ -1,7 +1,8 @@
 # BootsFaces-Examples: Responsive Design
 This demo shows how to set up a BootsFaces project and demonstrates the responsive design.
 
-Run this as a Tomcat application. The URL to start typically is http://localhost:8080/BootsFacesResponsiveDesign
+Run this as a Tomcat application. The URL to start typically is http://localhost:8080/BootsFacesResponsiveDesign.
+There's also a live demo at http://angularfaces.net/BootsFacesResponsiveDesign/.
 
 Tested on:
 <ul>
