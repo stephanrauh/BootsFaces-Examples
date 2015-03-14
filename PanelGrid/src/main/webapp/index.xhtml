@@ -9,38 +9,54 @@
 }
 </style>
 </h:head>
-<h:body>
-    <b:container >
-        <b:tabView>
-            <b:tab title="PrimeFaces" addLabels="false" addMessages="false">
-        <b:panel title="Contact information" look="info">
-            <h:form prependId="false" >
-                <b:panelGrid colSpans="2,3,7" size="xs">
-                    <prime:outputLabel value="First name" for="@next" />
-                    <prime:inputText value="#{person.firstName}" />
-                    <prime:message for="@previous" />
-                    <prime:outputLabel value="Last name" for="@next" />
-                    <prime:inputText value="#{person.lastName}" />
-                    <prime:message for="@previous" />
-                    <prime:outputLabel value="Birthdate" for="@next" />
-                    <prime:calendar value="#{person.birthdate}" />
-                    <prime:message for="@previous" />
-                </b:panelGrid>
-            </h:form>
-        </b:panel>
+<body>
+    <container> <b:tabView>
+        <b:tab title="PrimeFaces" addLabels="false" addMessages="false">
+            <b:panel title="Contact information" look="info">
+                <h:form prependId="false">
+                    <b:panelGrid colSpans="2,3,7" size="xs">
+                        <prime:outputLabel value="First name" for="@next" />
+                        <prime:inputText value="#{person.firstName}" />
+                        <prime:message for="@previous" />
+                        <prime:outputLabel value="Last name" for="@next" />
+                        <prime:inputText value="#{person.lastName}" />
+                        <prime:message for="@previous" />
+                        <prime:outputLabel value="Birthdate" for="@next" />
+                        <prime:calendar value="#{person.birthdate}" />
+                        <prime:message for="@previous" />
+                    </b:panelGrid>
+                </h:form>
+            </b:panel>
         </b:tab>
         <b:tab title="PrimeFaces + AngularFaces">
-        <b:panel title="Contact information" look="info">
-            <h:form prependId="false" >
-                <b:panelGrid colSpans="2,3,7" size="xs">
-                    <prime:inputText value="#{person.firstName}" />
-                    <prime:inputText value="#{person.lastName}" />
-                    <prime:calendar value="#{person.birthdate}" />
-                </b:panelGrid>
-            </h:form>
-        </b:panel>
+            <panel title="Contact information" look="info"> <h:form prependId="false">
+                <panelGrid colSpans="2,3,7" size="xs"> <prime:inputText value="#{person.firstName}" /> <prime:inputText
+                    value="#{person.lastName}" /> <prime:calendar value="#{person.birthdate}" /> </panelGrid>
+            </h:form> </panel>
         </b:tab>
-        </b:tabView>
-    </b:container>
-</h:body>
+    </b:tabView> </container>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push([ 'trackPageView' ]);
+      _paq.push([ 'enableLinkTracking' ]);
+      (function() {
+        var u = "//www.atapuerca.de/piwik/";
+        _paq.push([ 'setTrackerUrl', u + 'piwik.php' ]);
+        _paq.push([ 'setSiteId', 4 ]);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.async = true;
+        g.defer = true;
+        g.src = u + 'piwik.js';
+        s.parentNode.insertBefore(g, s);
+      })();
+    </script>
+    <noscript>
+        <p>
+            <img src="//www.atapuerca.de/piwik/piwik.php?idsite=4" style="border: 0;" alt="" />
+        </p>
+    </noscript>
+    <!-- End Piwik Code -->
+    </body>
 </html>
