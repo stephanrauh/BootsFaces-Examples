@@ -7,7 +7,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<h:outputStylesheet library="themes" name="journal.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="themes" name="#{themeSelectorBean.theme}.min.css" rendered="#{themeSelectorBean.bootswatchTheme}"></h:outputStylesheet>
 </h:head>
 <h:body>
 	<b:container>
@@ -15,8 +15,8 @@
 			<b:row>
 				<b:column col-lg="6" offset-lg="3">
 					<b:panel look="success" title="BootsFaces Combobox demo">
-						<b:selectOneMenu value="#{exampleBean.word}">
-							<f:selectItems value="#{exampleBean.words}" var="wordVar"
+						<b:selectOneMenu value="#{themeSelectorBean.theme}" label="Select a theme">
+							<f:selectItems value="#{themeSelectorBean.themes}" var="wordVar"
 								itemLabel="#{wordVar}" itemValue="#{wordVar}" />
 						</b:selectOneMenu>
 					</b:panel>
@@ -24,7 +24,7 @@
 			</b:row>
 			<b:row>
 				<b:column col-lg="6" offset-lg="3">
-                   Your current selection: #{exampleBean.word}.
+                   Your current selection: #{themeSelectorBean.theme}.
                 </b:column>
 			</b:row>
 			<b:row>
