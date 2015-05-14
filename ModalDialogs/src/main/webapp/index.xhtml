@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:prime="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<style>
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+	{
+	background-color: #ddd !important;
+}
+</style>
+</h:head>
+<h:body>
+	<b:container>
+		<h:form id="formID">
+
+			<b:modal id="aboutModal" title="About"
+				styleClass="aboutModalPseudoClass">
+				<b:panel>
+					<p>
+       			     This is a modal dialog.</p>
+       			     <p>
+       			     <b:datepicker></b:datepicker></p>
+   			     </b:panel>
+			</b:modal>
+
+			<b:navBar brand="Test" brandHref="/index.jsf" inverse="true"
+				fixed="true">
+				<b:navLink value="About"
+					pt:onclick="$('.aboutModalPseudoClass').modal('show');return false;"></b:navLink>
+			</b:navBar>
+
+			<b:button value="sdjhfk"
+				onclick="$('.aboutModalPseudoClass').modal('show');return false;"></b:button>
+		</h:form>
+	</b:container>
+</h:body>
+</html>

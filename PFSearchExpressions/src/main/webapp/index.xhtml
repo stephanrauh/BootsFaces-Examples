@@ -12,35 +12,39 @@
 <h:body>
 	<b:container>
 		<b:panel
-			title="Using @row, @column and @cell with a PrimeFaces DataTable"></b:panel>
-		<h:form id="formID">
+			title="Using @row, @column and @cell with a PrimeFaces DataTable">
+			<h:form id="formID">
+				<prime:contextMenu for="carsId">
+					<prime:menuitem value="decline offer" icon="ui-icon-close"
+						update="@form"
+						oncomplete="alert('This offer is way to expensive!')" />
+				</prime:contextMenu>
 
-			<prime:contextMenu for="carsId">
-				<prime:menuitem value="View" update="@form" icon="ui-icon-search"
-					oncomplete="PF('carDialog').show()" />
-				<prime:menuitem value="Delete" icon="ui-icon-close" update="@form"
-					actionListener="#{dtContextMenuView.deleteCar}" />
-			</prime:contextMenu>
-
-			<prime:dataTable value="#{carPool.carPool}" var="car" id="carsId"
-				rowKey="#{car.price}">
-				<prime:column headerText="Brand"><h:panelGroup id="innerBrandID">#{car.brand}</h:panelGroup></prime:column>
-				<prime:column headerText="Type"><h:panelGroup id="innerTypeID">#{car.type}</h:panelGroup></prime:column>
-				<prime:column headerText="Price"><h:panelGroup id="innerPriceID">#{car.price}</h:panelGroup></prime:column>
-			</prime:dataTable>
-			<prime:commandButton value="Update price in row 2"
-				actionListener="#{carPool.initRandomCarPool}"
-				update="carsId:@cell(innerPriceID,1)"></prime:commandButton>
-			<prime:commandButton value="Update price column"
-				actionListener="#{carPool.initRandomCarPool}"
-				update="carsId:@column(innerPriceID)"></prime:commandButton>
-			<prime:commandButton value="Update second Row"
-				actionListener="#{carPool.initRandomCarPool}"
-				update="carsId:@row(1)"></prime:commandButton>
-			<prime:commandButton value="Update the entire Table"
-				actionListener="#{carPool.initRandomCarPool}"
-				update="carsId"></prime:commandButton>
-		</h:form>
+				<prime:dataTable value="#{carPool.carPool}" var="car" id="carsId"
+					rowKey="#{car.price}">
+					<prime:column headerText="Brand">
+						<h:panelGroup id="innerBrandID">#{car.brand}</h:panelGroup>
+					</prime:column>
+					<prime:column headerText="Type">
+						<h:panelGroup id="innerTypeID">#{car.type}</h:panelGroup>
+					</prime:column>
+					<prime:column headerText="Price">
+						<h:panelGroup id="innerPriceID">#{car.price}</h:panelGroup>
+					</prime:column>
+				</prime:dataTable>
+				<prime:commandButton value="Update price in row 2"
+					actionListener="#{carPool.initRandomCarPool}"
+					update="carsId:@cell(innerPriceID,1)"></prime:commandButton>
+				<prime:commandButton value="Update price column"
+					actionListener="#{carPool.initRandomCarPool}"
+					update="carsId:@column(innerPriceID)"></prime:commandButton>
+				<prime:commandButton value="Update second Row"
+					actionListener="#{carPool.initRandomCarPool}"
+					update="carsId:@row(1)"></prime:commandButton>
+				<prime:commandButton value="Update the entire Table"
+					actionListener="#{carPool.initRandomCarPool}" update="carsId"></prime:commandButton>
+			</h:form>
+		</b:panel>
 	</b:container>
 </h:body>
 </html>
