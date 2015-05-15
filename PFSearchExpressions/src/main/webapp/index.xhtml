@@ -14,14 +14,15 @@
 		<b:panel
 			title="Using @row, @column and @cell with a PrimeFaces DataTable">
 			<h:form id="formID">
-				<prime:contextMenu for="carsId">
+				<prime:contextMenu for="@form:carsId:@column(innerPriceID)" event="mouseover">
 					<prime:menuitem value="decline offer" icon="ui-icon-close"
 						update="@form"
 						oncomplete="alert('This offer is way to expensive!')" />
 				</prime:contextMenu>
 
 				<prime:dataTable value="#{carPool.carPool}" var="car" id="carsId"
-					rowKey="#{car.price}">
+					rowKey="#{car.price}"
+					selectionMode="single">
 					<prime:column headerText="Brand">
 						<h:panelGroup id="innerBrandID">#{car.brand}</h:panelGroup>
 					</prime:column>
