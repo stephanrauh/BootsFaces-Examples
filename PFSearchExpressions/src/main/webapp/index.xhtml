@@ -8,44 +8,117 @@
 	>
 
 <h:head>
+	<h:outputStylesheet library="sh" name="shCore.css" />
+	<h:outputStylesheet library="sh" name="shCoreEclipse.css" />
+	<h:outputScript library="sh" name="shCore.js" target="head" />
+	<h:outputScript library="sh" name="shBrushXml.js" target="head" />
+	<h:outputScript library="sh" name="shBrushJava.js" target="head" />
+	<h:outputScript library="sh" name="shBrushGroovy.js" target="head" />
+	<h:outputScript library="sh" name="shBrushJScript.js" target="head" />
+
 </h:head>
 <h:body>
 	<b:container>
 		<b:panel
 			title="Using @row, @column and @cell with a PrimeFaces DataTable">
-			<h:form id="formID">
-				<prime:contextMenu for="@form:carsId:@column(innerPriceID)" event="mouseover">
-					<prime:menuitem value="decline offer" icon="ui-icon-close"
-						update="@form"
-						oncomplete="alert('This offer is way to expensive!')" />
-				</prime:contextMenu>
+			<p>This example show how to implement a column-specific context
+				menu to a PrimeFaces DataTable. It also demonstrates how to use the
+				search expressions @row, @column and @cell to update and individual
+				row, column or cell, respectively.</p>
 
-				<prime:dataTable value="#{carPool.carPool}" var="car" id="carsId"
-					rowKey="#{car.price}"
-					selectionMode="single">
-					<prime:column headerText="Brand">
-						<h:panelGroup id="innerBrandID">#{car.brand}</h:panelGroup>
-					</prime:column>
-					<prime:column headerText="Type">
-						<h:panelGroup id="innerTypeID">#{car.type}</h:panelGroup>
-					</prime:column>
-					<prime:column headerText="Price">
-						<h:panelGroup id="innerPriceID">#{car.price}</h:panelGroup>
-					</prime:column>
-				</prime:dataTable>
-				<prime:commandButton value="Update price in row 2"
-					actionListener="#{carPool.initRandomCarPool}"
-					update="carsId:@cell(innerPriceID,1)"></prime:commandButton>
-				<prime:commandButton value="Update price column"
-					actionListener="#{carPool.initRandomCarPool}"
-					update="carsId:@column(innerPriceID)"></prime:commandButton>
-				<prime:commandButton value="Update second Row"
-					actionListener="#{carPool.initRandomCarPool}"
-					update="carsId:@row(1)"></prime:commandButton>
-				<prime:commandButton value="Update the entire Table"
-					actionListener="#{carPool.initRandomCarPool}" update="carsId"></prime:commandButton>
-			</h:form>
+			<b:tabView>
+				<b:tab title="live demo">
+					<h:form id="formID">
+						<prime:contextMenu for="@form:carsId:@column(innerPriceID)"
+							event="mouseover" selectionMode="single">
+							<prime:menuitem value="decline offer" icon="ui-icon-close"
+								update="@form"
+								oncomplete="alert('This offer is way to expensive!')" />
+						</prime:contextMenu>
+
+						<prime:contextMenu for="@form:carsId:@column(innerBrandID)"
+							selectionMode="single">
+							<prime:menuitem value="ignore this brand" icon="ui-icon-close"
+								update="@form" oncomplete="alert('I hate this brand!')" />
+							<prime:menuitem value="choose this brand" icon="ui-icon-close"
+								update="@form" oncomplete="alert('I like this brand!')" />
+						</prime:contextMenu>
+
+						<prime:dataTable value="#{carPool.carPool}" var="car" id="carsId"
+							rowKey="#{car.price}" selectionMode="single">
+							<prime:column headerText="Brand">
+								<h:panelGroup id="innerBrandID">#{car.brand}</h:panelGroup>
+							</prime:column>
+							<prime:column headerText="Type">
+								<h:panelGroup id="innerTypeID">#{car.type}</h:panelGroup>
+							</prime:column>
+							<prime:column headerText="Price">
+								<h:panelGroup id="innerPriceID">#{car.price}</h:panelGroup>
+							</prime:column>
+						</prime:dataTable>
+						<prime:commandButton value="Update price in row 2"
+							actionListener="#{carPool.initRandomCarPool}"
+							update="carsId:@cell(innerPriceID,1)"></prime:commandButton>
+						<prime:commandButton value="Update price column"
+							actionListener="#{carPool.initRandomCarPool}"
+							update="carsId:@column(innerPriceID)"></prime:commandButton>
+						<prime:commandButton value="Update second Row"
+							actionListener="#{carPool.initRandomCarPool}"
+							update="carsId:@row(1)"></prime:commandButton>
+						<prime:commandButton value="Update the entire Table"
+							actionListener="#{carPool.initRandomCarPool}" update="carsId"></prime:commandButton>
+					</h:form>
+				</b:tab>
+				<b:tab title="JSF markup of the context menu">
+				      <script type="syntaxhighlighter" class="brush: xml; toolbar: false;gutter: false; first-line: 1">
+<![CDATA[
+						<prime:contextMenu for="@form:carsId:@column(innerPriceID)"
+							event="mouseover" selectionMode="single">
+							<prime:menuitem value="decline offer" icon="ui-icon-close"
+								update="@form"
+								oncomplete="alert('This offer is way to expensive!')" />
+						</prime:contextMenu>
+
+						<prime:contextMenu for="@form:carsId:@column(innerBrandID)"
+							selectionMode="single">
+							<prime:menuitem value="ignore this brand" icon="ui-icon-close"
+								update="@form" oncomplete="alert('I hate this brand!')" />
+							<prime:menuitem value="choose this brand" icon="ui-icon-close"
+								update="@form" oncomplete="alert('I like this brand!')" />
+						</prime:contextMenu>
+]]>
+</script>
+<p>Note that it's important to set the attributes <code>rowKey</code> and <code>selectionMode="single"</code> of the PrimeFaces DataTable.
+Otherwise, the context menus won't show.</p>
+				      <script type="syntaxhighlighter" class="brush: xml; toolbar: false;gutter: false; first-line: 1">
+<![CDATA[
+						<prime:dataTable value="&num;{carPool.carPool}" var="car" id="carsId"
+							rowKey="#{car.price}" selectionMode="single">
+]]>
+</script>
+				</b:tab>
+				<b:tab title="JSF markup of the command buttons">
+				      <script type="syntaxhighlighter" class="brush: xml; toolbar: false;gutter: false; first-line: 1">
+<![CDATA[
+						<prime:commandButton value="Update price in row 2"
+							actionListener="&num;{carPool.initRandomCarPool}"
+							update="carsId:@cell(innerPriceID,1)" />
+						<prime:commandButton value="Update price column"
+							actionListener="&num;{carPool.initRandomCarPool}"
+							update="carsId:@column(innerPriceID)" />
+						<prime:commandButton value="Update second Row"
+							actionListener="&num;{carPool.initRandomCarPool}"
+							update="carsId:@row(1)" />
+						<prime:commandButton value="Update the entire Table"
+							actionListener="&num;{carPool.initRandomCarPool}" update="carsId"/>
+]]>
+</script>
+				</b:tab>
+			</b:tabView>
 		</b:panel>
 	</b:container>
+	<script type="text/javascript">
+                    SyntaxHighlighter.all();
+                </script>
 </h:body>
 </html>
