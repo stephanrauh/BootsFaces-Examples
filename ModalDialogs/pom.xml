@@ -55,7 +55,7 @@
 				<dependency>
 					<groupId>com.sun.faces</groupId>
 					<artifactId>jsf-api</artifactId>
-					<version>2.2.10</version>
+					<version>2.2.11</version>
 					<scope>provided</scope>
 				</dependency>
 			</dependencies>
@@ -69,13 +69,13 @@
 				<dependency>
 					<groupId>com.sun.faces</groupId>
 					<artifactId>jsf-api</artifactId>
-					<version>2.2.10</version>
+					<version>2.2.11</version>
 					<scope>compile</scope>
 				</dependency>
 				<dependency>
 					<groupId>com.sun.faces</groupId>
 					<artifactId>jsf-impl</artifactId>
-					<version>2.2.10</version>
+					<version>2.2.11</version>
 					<scope>runtime</scope>
 				</dependency>
 			</dependencies>
