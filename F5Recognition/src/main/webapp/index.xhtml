@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:metadata>
+       <f:viewAction action="#{f5Recognizer.checkF5}" onPostBack="true"/>
+  </f:metadata>
+<h:head>
+</h:head>
+<h:body>
+	<b:container>
+		<h:form>
+			<b:row>
+				<b:column col-lg="6" offset-lg="3">
+					<b:panel look="success" title="F5 Detector">
+						<b:messages />
+					</b:panel>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column col-lg="6" offset-lg="3">
+					<h:commandButton value="Submit form (no reload)" />
+					<h:commandButton value="Go to page 2" action="page2.xhtml" />
+				</b:column>
+			</b:row>
+		</h:form>
+	</b:container>
+</h:body>
+</html>
