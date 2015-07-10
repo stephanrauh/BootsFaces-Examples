@@ -1,11 +1,9 @@
-# BootsFaces-Examples: Combobox (aka drop-down-menu, aka selectOneMenu)
-This demo shows how to use a BootsFaces &lt;b:selectOneMenu /&gt;
+# BootsFaces-Examples: F5Detector
+This demo shows how to detect the browser's reload event or the user hitting the F5 key.
 
-Run this as a Tomcat application. The URL to start typically is http://localhost:8080/BootsFacesCombobox.
+Run this as a Tomcat application. The URL to start typically is http://localhost:8080/F5Detector.
 
 Tested on:
 <ul>
-<li>Tomcat 8.0 / Oracle Mojarra 2.2.10</li>
 <li>Tomcat 8.0 / Apache MyFaces 2.2.7</li>
-<li>WildFly 8.2</li>
 </ul>

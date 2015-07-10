@@ -5,4 +5,4 @@ rebel.xml
 dist
 .faces-config.xml.jsfdia
 .project
-.classpath
+.classpath/PFSearchExpressions/

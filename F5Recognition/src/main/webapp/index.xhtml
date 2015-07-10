@@ -7,8 +7,8 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <f:metadata>
-       <f:viewAction action="#{f5Recognizer.checkF5}" onPostBack="true"/>
-  </f:metadata>
+   <f:viewAction action="#{f5Detector.checkF5}" onPostBack="true"/>
+</f:metadata>
 <h:head>
 </h:head>
 <h:body>
@@ -24,6 +24,10 @@
 			<b:row>
 				<b:column col-lg="6" offset-lg="3">
 					<h:commandButton value="Submit form (no reload)" />
+					<h:commandButton value="AJAX: render @all">
+						<f:ajax render="@all"></f:ajax>
+					</h:commandButton>
+					
 					<h:commandButton value="Go to page 2" action="page2.xhtml" />
 				</b:column>
 			</b:row>
