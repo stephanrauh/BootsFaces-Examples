@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+<style>
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {background-color:#ddd !important; }
+</style>
+</h:head>
+<h:body>
+	<b:navBar brand="BootsFaces Rocks!" brandHref="/index.jsf" inverse="true"
+		fixed="true">
+		<b:navbarLinks>
+			<b:dropMenu value="Help" 
+			            styleClass="navbar-inverse" style="color:#fff"
+			            contentClass="navbar-inverse" contentStyle="color:#fff">
+				<b:navLink value="About" 
+				styleClass="navbar-inverse" style="color:#fff"
+				contentClass="navbar-inverse" contentStyle="color:#fff" 
+				onclick="alert('This demo shows how to implement a multi-level drop-down menu.')"></b:navLink>
+			</b:dropMenu>
+		</b:navbarLinks>
+	</b:navBar>
+
+    <b:container>
+        <b:tabView style="dd">
+            <b:tab title="large">
+                <div style="height: 10px" />
+                <ui:include src="large.xhtml" />
+            </b:tab>
+            <b:tab title="medium (default)">
+                <div style="height: 10px" />
+                <ui:include src="medium.xhtml" />
+            </b:tab>
+            <b:tab title="small">
+                <div style="height: 10px" />
+                <ui:include src="small.xhtml" />
+            </b:tab>
+        </b:tabView>
+    </b:container>
+ <!-- Piwik -->
+  <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push([ 'trackPageView' ]);
+      _paq.push([ 'enableLinkTracking' ]);
+      (function() {
+        var u = "//www.atapuerca.de/piwik/";
+        _paq.push([ 'setTrackerUrl', u + 'piwik.php' ]);
+        _paq.push([ 'setSiteId', 4 ]);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.async = true;
+        g.defer = true;
+        g.src = u + 'piwik.js';
+        s.parentNode.insertBefore(g, s);
+      })();
+    </script>
+  <noscript>
+    <p>
+      <img src="//www.atapuerca.de/piwik/piwik.php?idsite=4" style="border: 0;" alt="" />
+    </p>
+  </noscript>
+  <!-- End Piwik Code -->
+</h:body>
+</html>
