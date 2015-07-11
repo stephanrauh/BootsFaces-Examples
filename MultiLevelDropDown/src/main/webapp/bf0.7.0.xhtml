@@ -5,6 +5,7 @@
 <style>
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {background-color:#ddd !important; }
 </style>
+<link type="text/css" rel="stylesheet" href="dropdown-submenu.css"></link>
 </h:head>
 <h:body>
 	<b:navBar brand="BootsFaces Rocks!" brandHref="/index.jsf" inverse="true"
@@ -18,21 +19,12 @@
 				contentClass="navbar-inverse" contentStyle="color:#fff" 
 				onclick="alert('This demo shows how to implement a multi-level drop-down menu.'); return false;"></b:navLink>
 				<b:dropMenu value="nested help menu"
-				        styleClass="navbar-inverse" style="color:#fff"
+				        styleClass="navbar-inverse dropdown-submenu" style="color:#fff"
 			            contentClass="navbar-inverse" contentStyle="color:#fff">
 						<b:navLink value="Nested About" 
 						styleClass="navbar-inverse" style="color:#fff"
-						contentClass="navbar-inverse" contentStyle="color:#f00" 
-						onclick="alert('You have clicked a level-3 menu item.'); return false;"></b:navLink>
-						<b:dropMenu value="level 4 menu"
-				        styleClass="navbar-inverse" style="color:#00f"
-			            contentClass="navbar-inverse" contentStyle="color:#fff">
-						<b:navLink value="About level 4" 
-						styleClass="navbar-inverse" style="color:#fff"
 						contentClass="navbar-inverse" contentStyle="color:#fff" 
-						onclick="alert('You have selected a menu nested four levels deep.'); return false;"></b:navLink>
-				</b:dropMenu>
-						
+						onclick="alert('This demo shows how to implement a multi-level drop-down menu.'); return false;"></b:navLink>
 				</b:dropMenu>
 			</b:dropMenu>
 		</b:navbarLinks>
@@ -40,8 +32,6 @@
 
     <b:container>
 		<p>The interesting part of this demo is the menu bar. It contains nested menus.</p>
-		<p>Nested submenus work out of the box in BootsFaces 0.8.0. If you are using the predecessor version BootsFaces 0.7.0,
-		see <a href="bf0.7.0.jsf">the BootsFaces 0.7.0 demo.</a></p>
 		<p>I've found the CSS source code at http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3. It's available under the <a target="#" href="http://bootsnipp.com/license">MIT license</a>.</p>
     </b:container>
  <!-- Piwik -->
