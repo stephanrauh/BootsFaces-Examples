@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<!-- Workaround to get the multiple choice combobox running -->
+	<h:outputStylesheet library="bsf" name="css/dropdowns.css"></h:outputStylesheet>
+	<h:outputScript library="bsf" name="js/dropdown.js" target="body"></h:outputScript>
+
+	<!-- Styles needed for the Syntaxhighlighter plugin -->
+	<h:outputStylesheet library="sh" name="css/shCore.css" />
+	<h:outputStylesheet library="sh" name="css/shCoreEclipse.css" />
+	<h:outputScript library="sh" name="js/shCore.js" target="head" />
+	<h:outputScript library="sh" name="js/shBrushXml.js" target="head" />
+
+</h:head>
+<h:body>
+	<b:navBar brand="BootsFaces Rocks!" brandHref="/index.jsf"
+		inverse="true" fixed="true">
+		<b:navbarLinks>
+			<b:navLink value="About"
+				onclick="alert('This demo shows how to use the multiple-choice combobox.')"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+	<b:container>
+		<h:form>
+			<b:row>
+				<b:column col-lg="10" offset-lg="1">
+					<b:panel look="success" title="SelectMultMenu demo">
+						<p>
+							As of BootsFaces 0.7.0, the
+							<code>&lt;b:selectMultiMenu /&gt;</code>
+							needs a little help to work properly. You have three choices:
+						</p>
+						<ul>
+							<li>Add a <code>&lt;b:dropDownMenu /&gt;</code>. If your
+								application has a NavBar menu, add a drop down menu there.
+							</li>
+							<li>You can add the forgotten dependencies in the head
+								section of your JSF page: <script type="syntaxhighlighter"
+									class="brush: xml; toolbar: false;first-line: 0">
+                                    <![CDATA[
+<h:head>
+	<h:outputStylesheet library="bsf" name="css/dropdowns.css"></h:outputStylesheet>
+	<h:outputScript library="bsf" name="js/dropdown.js" target="body"></h:outputScript>
+</h:head>
+]]></script>
+							</li>
+							<li>Wait until BootsFaces 0.8 arrives :).</li>
+						</ul>
+						<b:selectMultiMenu nonSelectedText="Please select">
+							<f:selectItem itemLabel="Option 1" itemValue="1" />
+							<f:selectItem itemLabel="Option 2" itemValue="2" />
+							<f:selectItem itemLabel="Option 3" itemValue="3" />
+						</b:selectMultiMenu>
+					</b:panel>
+				</b:column>
+			</b:row>
+		</h:form>
+	</b:container>
+	<script type="text/javascript">
+    SyntaxHighlighter.all();
+  </script>
+</h:body>
+</html>

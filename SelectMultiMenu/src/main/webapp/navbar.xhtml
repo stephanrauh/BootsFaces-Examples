@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	>
+
+<h:head>
+</h:head>
+<h:body>
+	<b:navBar brand="BootsFaces Rocks!" brandHref="/index.jsf" inverse="true"
+		fixed="true">
+		<b:navbarLinks>
+			<b:dropMenu value="Help">
+				<b:navLink value="About" onclick="alert('This demo shows how to use the multiple-choice combobox.')"></b:navLink>
+			</b:dropMenu>
+		</b:navbarLinks>
+	</b:navBar>
+	<b:container>
+		<h:form>
+			<b:row>
+				<b:column col-lg="6" offset-lg="3">
+					<b:panel look="success" title="SelectMultMenu demo">
+						<b:selectMultiMenu nonSelectedText="Please select">
+						  <f:selectItem itemLabel="Option 1" itemValue="1"/>
+						  <f:selectItem itemLabel="Option 2" itemValue="2"/>
+						  <f:selectItem itemLabel="Option 3" itemValue="3"/>
+						</b:selectMultiMenu>
+					</b:panel>
+				</b:column>
+			</b:row>
+		</h:form>
+	</b:container>
+</h:body>
+</html>
