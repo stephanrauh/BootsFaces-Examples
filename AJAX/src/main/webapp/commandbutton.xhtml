@@ -1,0 +1,25 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="some_form">
+		<ui:repeat id="some_elements" var="image"
+			value="#{imageGallery.images}">
+			<b:panelGrid colSpans="2,2,8">
+				<b:commandButton value="Change image" ajax="true"
+					actionListener="#{imageGallery.chooseAnotherImage(image)}"
+					update="@form:some_elements:0:graphic" />
+				<p:commandButton value="Change image" ajax="true"
+					actionListener="#{imageGallery.chooseAnotherImage(image)}"
+					update="@form:some_elements:graphic" />
+				
+				<h:graphicImage url="#{image}" id="graphic" />
+				
+			</b:panelGrid>
+		</ui:repeat>
+	</h:form>
+</ui:fragment>
