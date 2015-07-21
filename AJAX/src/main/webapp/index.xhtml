@@ -29,26 +29,10 @@
     </b:container>
  <!-- Piwik -->
   <script type="text/javascript">
-      var _paq = _paq || [];
-      _paq.push([ 'trackPageView' ]);
-      _paq.push([ 'enableLinkTracking' ]);
-      (function() {
-        var u = "//www.atapuerca.de/piwik/";
-        _paq.push([ 'setTrackerUrl', u + 'piwik.php' ]);
-        _paq.push([ 'setSiteId', 4 ]);
-        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-        g.type = 'text/javascript';
-        g.async = true;
-        g.defer = true;
-        g.src = u + 'piwik.js';
-        s.parentNode.insertBefore(g, s);
-      })();
-    </script>
-  <noscript>
-    <p>
-      <img src="//www.atapuerca.de/piwik/piwik.php?idsite=4" style="border: 0;" alt="" />
-    </p>
-  </noscript>
-  <!-- End Piwik Code -->
+  var doClick = function(){ $('#some_form\\:some_elements\\:1\\:j_idt11').click();
+                            window.setTimeout(doClick, 100);
+                          };
+ // setTimeout(doClick,      1000); 
+  </script>
 </h:body>
 </html>

@@ -13,14 +13,14 @@ public class ImageGallery {
 		add("http://www.11pictures.com/foto/stories/Camargue_2013_Nature/framedPreview.png");
 		add("http://www.11pictures.com/foto/stories/Camargue_2013/framedPreview.png");
 		add("http://www.11pictures.com/foto/stories/GreenCevennes/framedPreview.png");
-		add("http://www.11pictures.com/foto/stories/Alpilles_2013/framedPreview.png");
 	}};
 	
 	private List<String> imagePool = new ArrayList<String>() {{
 		add("http://www.11pictures.com/foto/stories/ValleeDeLaGrandMaison_2012/framedPreview.png");
 		add("http://www.11pictures.com/foto/stories/Clouds2/framedPreview.png");
 		add("http://www.11pictures.com/foto/stories/BretagneFog2003/framedPreview.png");
-		add("http://www.11pictures.com/foto/stories/life-in-winter/framedPreview.png");
+		add("http://www.11pictures.com/foto/stories/LifeInWinter/framedPreview.png");
+		add("http://www.11pictures.com/foto/stories/Alpilles_2013/framedPreview.png");
 	}
 	};
 	
