@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+<style>
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {background-color:#ddd !important; }
+</style>
+</h:head>
+<h:body>
+	<h:form>
+	    <b:container>
+	    	<b:panelGrid colSpans="4,2,6">
+				<b:messages id="nachrichten" showDetail="true" showSummary="false" />
+				<b:selectOneMenu value="#{user.year}" required="true" requiredMessage="Pls enter year">
+				    <f:selectItem itemLabel="select year" itemValue="#{null}" />
+				    <f:selectItems value="#{yearHelper.allYears}" var="year" 
+				                   itemValue="#{year}" itemLabel="#{year}" />
+				    <f:facet name="append">
+				        <h:outputText value="" />
+				    </f:facet>
+				</b:selectOneMenu>
+				<b:commandButton value="OK" action="#{user.validate}" />
+			</b:panelGrid>
+	    </b:container>
+    </h:form>
+</h:body>
+</html>
