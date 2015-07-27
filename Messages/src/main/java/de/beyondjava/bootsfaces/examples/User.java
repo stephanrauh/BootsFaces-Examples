@@ -20,8 +20,16 @@ public class User {
 	}
 	
 	public void validate() {
-		if (year > 0) {
-			FacesMessage success = new FacesMessage("Thank you!");
+		if (year > 50) {
+			FacesMessage success = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Thank you!");
+			FacesContext.getCurrentInstance().addMessage(null, success);
+		}
+		else if (year > 30) {
+			FacesMessage success = new FacesMessage(FacesMessage.SEVERITY_WARN, "", "Hey, you're in your best years!");
+			FacesContext.getCurrentInstance().addMessage(null, success);
+		}
+		else if (year > 0) {
+			FacesMessage success = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Enjoy your youth!");
 			FacesContext.getCurrentInstance().addMessage(null, success);
 		}
 	}
