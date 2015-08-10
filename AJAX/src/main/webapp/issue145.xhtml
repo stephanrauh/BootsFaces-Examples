@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+    <title>Really simple CRUD</title>
+    </h:head>
+    <h:body>
+    <h3>List items</h3>
+    <h:panelGroup rendered="#{empty bean.list}">
+        <p>Table is empty! Please add new items.</p>
+    </h:panelGroup>
+    <h:panelGroup id="panelAdd">
+
+        <h:form id="formAdd" rendered="#{!bean.edit}">
+            <h3>Add item</h3>
+            <p>
+                Value:
+                <h:inputText value="#{bean.item.value}" />
+            </p>
+            <p>
+                <h:commandButton value="add" action="#{bean.add}" />
+            </p>
+        </h:form>
+    </h:panelGroup>
+    <h:panelGroup id="panelEdit">
+
+        <h:form id="formEdit" rendered="#{bean.edit}">
+            <h3>Edit item #{bean.item.id}</h3>
+            <p>
+                Value:
+                <h:inputText value="#{bean.item.value}" />
+            </p>
+            <p>
+                <h:commandButton value="save" action="#{bean.save}" />
+            </p>
+        </h:form>
+    </h:panelGroup>
+    <h:form rendered="#{not empty bean.list}">
+        <h:dataTable value="#{bean.list}" var="item">
+            <h:column>
+                <f:facet name="header">ID</f:facet>#{item.id}</h:column>
+            <h:column>
+                <f:facet name="header">Value</f:facet>#{item.value}</h:column>
+            <h:column>
+                <b:commandButton value="edit bf (not working)"
+                    action="#{bean.edit(item)}"
+                    update=":panelEdit :panelAdd :formEdit :formAdd" ajax="true" />
+
+                <p:commandButton value="edit pf (working)"
+                    action="#{bean.edit(item)}"
+                    update=":panelEdit :panelAdd :formEdit :formAdd" ajax="true" />
+
+                <h:commandButton value="edit with jsf ajax (working)"
+                    action="#{bean.edit(item)}">
+                    <f:ajax render=":panelEdit :panelAdd :formEdit :formAdd"
+                        execute="@form" />
+                </h:commandButton>
+            </h:column>
+            <h:column>
+                <h:commandButton value="delete" action="#{bean.delete(item)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    </h:body>
+ </html>
