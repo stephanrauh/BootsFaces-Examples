@@ -11,23 +11,27 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class CarBean {
-	
+	private int counter = 0;
+
+	private String lastMessage = null;
+
 	private List<String> messages = new ArrayList<>();
-	
+
 	private boolean bool;
-	
+
 	private String input = "Ignore the text. It's not important.";
-	
+
 	public CarBean() {
 		getMessages().add("No message yet.");
 		getMessages().add("Play with the combobox to add messages.");
 	}
-	private int brand=1;
+
+	private int brand = 1;
 
 	public int getBrand() {
 		return brand;
 	}
-	
+
 	private String now() {
 		return new SimpleDateFormat("HH:mm:ss.SSS").format(new Date());
 	}
@@ -44,66 +48,106 @@ public class CarBean {
 	public void setMessages(List<String> messages) {
 		this.messages = messages;
 	}
-	
+
 	public String onBlur() {
-		messages.add(0, now() + " blur");
+		String event = " blur";
+		report(event);
 		return "Hallo";
 	}
 
+	private void report(String event) {
+		if (event.equals(lastMessage)) {
+			counter++;
+			messages.set(0, now() + event + " ("+counter+")");
+		} else {
+			counter =1;
+			messages.add(0, now() + event);
+		}
+		lastMessage=event;
+
+	}
+
 	public String onChange() {
-		messages.add(0, now() + " onChange");
+		String event = " c	hange";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onValueChange() {
-		messages.add(0, now() + " valueChange");
+		String event = " valueChange";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onClick() {
-		messages.add(0, now() + " click");
+		String event = " click";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onDblClick() {
-		messages.add(0, now() + " dblclick");
+		String event = " dblclick";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onFocus() {
-		messages.add(0, now() + " focus");
+		String event = " focus";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onKeyDown() {
-		messages.add(0, now() + " keydown");
+		String event = " keydown";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onKeyPress() {
-		messages.add(0, now() + " keypress");
+		String event = " keypress";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onKeyUp() {
-		messages.add(0, now() + " keyup");
+		String event = " keyup";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onMouseDown() {
-		messages.add(0, now() + " mousedown");
+		String event = " mousedown";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onMouseMove() {
-		messages.add(0, now() + " mousemove");
+		String event = " mousemove";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onMouseOut() {
-		messages.add(0, now() + " mouseout");
+		String event = " mouseout";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onMouseOver() {
-		messages.add(0, now() + " mouseover");
+		String event = " mouseover";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onMouseUp() {
-		messages.add(0, now() + " mouseup");
+		String event = " mouseup";
+		report(event);
 		return "Hallo";
 	}
+
 	public String onSelect() {
-		messages.add(0, now() + " select");
+		String event = " select";
+		report(event);
 		return "Hallo";
 	}
 
