@@ -2,9 +2,6 @@
     xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-<style>
-    .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {background-color:#ddd !important; }
-</style>
 </h:head>
 <h:body style="padding-top:75px">
    	<b:container>
@@ -22,6 +19,8 @@
         <b:tabView style="dd">
             <b:tab title="combobox">
                 <div style="height: 10px" />
+                			<b:panel look="primary" title="AJAXified Combobox">
+                </b:panel>
                  <ui:include src="combobox.xhtml" />
             </b:tab>
             <b:tab title="checkbox">

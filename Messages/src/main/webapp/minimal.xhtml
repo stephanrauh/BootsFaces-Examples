@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+
+</h:head>
+<h:body>
+	<h:form>
+		<b:messages id="messsage" />
+		<b:inputText required="true"
+			requiredMessage="That field is required, dude!" />
+
+		<b:commandButton value="Invoke me!" update="@form" />
+	</h:form>
+</h:body>
+</html>

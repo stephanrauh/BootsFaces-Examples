@@ -1,8 +1,5 @@
-<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:b="http://bootsfaces.net/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 	<h:form>
 		<b:row>
@@ -12,7 +9,7 @@
 						<!-- onmousemove="console.log('mouse move')ajax:carBean.onMouseMove();"  -->
 					</ui:remove>
 
-					<b:selectOneMenu value="#{carBean.brand}" id="brandID"
+					<b:inputText value="#{carBean.input}" id="inputId"
 						onchange="console.log('before onChange');ajax:carBean.onChange();javascript:console.log('afterOnChange')"
 						onblur="console.log('blur');ajax:carBean.onBlur()"
 						onfocus="console.log('focus');ajax:carBean.onFocus()"
@@ -26,14 +23,7 @@
 						onmouseselect="console.log('mouse select');ajax:carBean.onMouseSelect();"
 						onvaluechange="console.log('valueChange);ajax:carBean.onValueChange()"
 						onselect="console.log('select');ajax:carBean.onSelect()"
-						update="messages">
-
-
-						<f:selectItem itemLabel="(Please select)" itemValue="0" />
-						<f:selectItem itemLabel="Fiat" itemValue="1" />
-						<f:selectItem itemLabel="Honda" itemValue="2" />
-						<f:selectItem itemLabel="Opel" itemValue="3" />
-					</b:selectOneMenu>
+						update="messages"/>
 				</b:panel>
 			</b:column>
 			<b:column col-sm="6">
