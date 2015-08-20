@@ -8,9 +8,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean
+@ManagedBean(name="AJAXBean")
 @SessionScoped
-public class CarBean {
+public class AJAXBean {
 	private int counter = 0;
 
 	private String lastMessage = null;
@@ -21,12 +21,16 @@ public class CarBean {
 
 	private String input = "Ignore the text. It's not important.";
 
-	public CarBean() {
+	public AJAXBean() {
 		getMessages().add("No message yet.");
 		getMessages().add("Play with the combobox to add messages.");
 	}
 
 	private int brand = 1;
+	
+	public void clearMessages() {
+		messages.clear();
+	}
 
 	public int getBrand() {
 		return brand;
@@ -58,12 +62,12 @@ public class CarBean {
 	private void report(String event) {
 		if (event.equals(lastMessage)) {
 			counter++;
-			messages.set(0, now() + event + " ("+counter+")");
+			messages.set(0, now() + event + " (" + counter + ")");
 		} else {
-			counter =1;
+			counter = 1;
 			messages.add(0, now() + event);
 		}
-		lastMessage=event;
+		lastMessage = event;
 
 	}
 
@@ -165,5 +169,15 @@ public class CarBean {
 
 	public void setInput(String input) {
 		this.input = input;
+	}
+
+	public String standardJSFAction() {
+		report("Standard JSF action called");
+		return null;
+	}
+
+	public String standardJSFActionListener() {
+		report("Standard JSF actionlistener called");
+		return null;
 	}
 }

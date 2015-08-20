@@ -9,24 +9,24 @@
 			<b:column col-sm="6">
 				<b:panel look="primary" title="AJAXified Combobox">
 					<ui:remove>
-						<!-- onmousemove="console.log('mouse move')ajax:carBean.onMouseMove();"  -->
+						<!-- onmousemove="console.log('mouse move')ajax:AJAXBean.onMouseMove();"  -->
 					</ui:remove>
 
-					<b:selectOneMenu value="#{carBean.brand}" id="brandID"
-						onchange="console.log('before onChange');ajax:carBean.onChange();javascript:console.log('afterOnChange')"
-						onblur="console.log('blur');ajax:carBean.onBlur()"
-						onfocus="console.log('focus');ajax:carBean.onFocus()"
-						onclick="console.log('click');ajax:carBean.onClick()"
-						ondblclick="console.log('dblclick');ajax:carBean.onDblClick()"
-						onkeydown="console.log('keyd own');ajax:carBean.onKeyDown()"
-						onkeyup="console.log('key up');ajax:carBean.onKeyUp()"
-						onkeypress="console.log('key press');ajax:carBean.onKeyPress()"
-						onmousedown="console.log('mouse down');ajax:carBean.onMouseDown();"
-						onmouseout="console.log('mouse out');ajax:carBean.onMouseOut();"
-						onmouseup="console.log('mouse up');ajax:carBean.onMouseUp();"
-						onmouseselect="console.log('mouse select');ajax:carBean.onMouseSelect();"
-						onvaluechange="console.log('valueChange);ajax:carBean.onValueChange()"
-						onselect="console.log('select');ajax:carBean.onSelect()"
+					<b:selectOneMenu value="#{AJAXBean.brand}" id="brandID"
+						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
+						onblur="console.log('blur');ajax:AJAXBean.onBlur()"
+						onfocus="console.log('focus');ajax:AJAXBean.onFocus()"
+						onclick="console.log('click');ajax:AJAXBean.onClick()"
+						ondblclick="console.log('dblclick');ajax:AJAXBean.onDblClick()"
+						onkeydown="console.log('keyd own');ajax:AJAXBean.onKeyDown()"
+						onkeyup="console.log('key up');ajax:AJAXBean.onKeyUp()"
+						onkeypress="console.log('key press');ajax:AJAXBean.onKeyPress()"
+						onmousedown="console.log('mouse down');ajax:AJAXBean.onMouseDown();"
+						onmouseout="console.log('mouse out');ajax:AJAXBean.onMouseOut();"
+						onmouseup="console.log('mouse up');ajax:AJAXBean.onMouseUp();"
+						onmouseselect="console.log('mouse select');ajax:AJAXBean.onMouseSelect();"
+						onvaluechange="console.log('valueChange);ajax:AJAXBean.onValueChange()"
+						onselect="console.log('select');ajax:AJAXBean.onSelect()"
 						update="messages">
 
 
@@ -41,7 +41,7 @@
 				<b:well id="messages">
 	                Last action:
 	                <ul>
-					  <ui:repeat var="message" value="#{carBean.messages}">
+					  <ui:repeat var="message" value="#{AJAXBean.messages}">
 						<li>#{message}</li>
 					  </ui:repeat>
 					</ul>
