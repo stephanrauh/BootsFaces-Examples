@@ -13,7 +13,7 @@
 </style>
 </h:head>
 <h:body style="padding-top:75px">
-	<b:container>
+	<b:container id="menu">
 		<b:navBar brand="KP's Brand" inverse="true" brandHref="#" fixed="top">
 			<b:navbarLinks>
 				<b:navLink value="home" iconAwesome="home" href="#"></b:navLink>
@@ -24,23 +24,25 @@
 		</b:navBar>
 	</b:container>
 
-	<b:container>
-		<h:form>
-					<ui:include src="checkbox.xhtml" />
-					<ui:include src="combobox.xhtml" />
-		</h:form>
-		<br></br>
-		<h:form>
+		<b:container id="content">
 			<b:tabView id="tabViewID">
-				<b:tab title="combobox" onclick="ajax:AJAXBean.clearMessages()" update="**:*messages">
+				<b:tab title="command button"
+					onclick="ajax:AJAXBean.clearMessages()" update="**:*messages">
+					<div style="height: 10px" />
+					<ui:include src="commandbutton.xhtml" />
+				</b:tab>
+				<b:tab title="combobox" onclick="ajax:AJAXBean.clearMessages()"
+					update="**:*messages">
 					<div style="height: 10px" />
 					<ui:include src="combobox.xhtml" />
 				</b:tab>
- 				<b:tab title="inputText" onclick="ajax:AJAXBean.clearMessages()" update="**:*messages">
+				<b:tab title="inputText" onclick="ajax:AJAXBean.clearMessages()"
+					update="**:*messages">
 					<div style="height: 10px" />
 					<ui:include src="inputText.xhtml" />
 				</b:tab>
-				<b:tab title="checkbox" onclick="ajax:AJAXBean.clearMessages()" update="**:*messages">
+				<b:tab title="checkbox" onclick="ajax:AJAXBean.clearMessages()"
+					update="**:*messages">
 					<div style="height: 10px" />
 					<ui:include src="checkbox.xhtml" />
 				</b:tab>
@@ -49,13 +51,7 @@
 					<div style="height: 10px" />
                 to do
                 </b:tab>
-				<b:tab title="command button"
-					onclick="ajax:AJAXBean.clearMessages()" update="**:*messages">
-					<div style="height: 10px" />
-					<ui:include src="commandbutton.xhtml" />
-				</b:tab>
 			</b:tabView>
-		</h:form>
-	</b:container>
+		</b:container>
 </h:body>
 </html>

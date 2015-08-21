@@ -66,6 +66,7 @@ public class AJAXBean {
 
 	public void clearMessages() {
 		messages.clear();
+		messages.add("Messages cleared by tab change AJAX event");
 	}
 
 	public int getBrand() {
