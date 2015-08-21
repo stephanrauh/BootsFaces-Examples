@@ -1,18 +1,54 @@
-<ui:fragment xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 	<h:form>
 		<b:row>
 			<b:column col-sm="6">
-				<b:panel look="primary" title="AJAXified Combobox">
-					<ui:remove>
-						<!-- onmousemove="console.log('mouse move')ajax:AJAXBean.onMouseMove();"  -->
-					</ui:remove>
-					<p>This checkbox carries quite a few JavaScript callback functions, which also call
-					   an actionlistener on the server-side Java bean: onchange, onblur, onfocus, onclick,
-					   ondblclick, onkeydown, onkeyup, onmousedown, onmouseup, onmouseover, onmouseout,
-					   onmousemove, onvaluechange and onselect.</p>
-					<b:selectBooleanCheckbox value="#{AJAXBean.bool}" id="cbxId"
+				<b:panel look="primary" title="non-AJAXified Checkbox">
+					<p>This checkbox is not AJAX-enabled.</p>
+					<b:selectBooleanCheckbox value="#{AJAXBean.bool1}" id="cbxId1"
+						 />
+					<b:label text="value of the combobox: #{AJAXBean.bool1}" />
+					<br /><br />
+					<b:commandButton value="submit" look="info" />
+				</b:panel>
+			
+				<b:panel look="primary" title="AJAXified Checkbox - onchange">
+					<p>This checkbox carries a single JavaScript callback
+						functions, which also call an actionlistener on the server-side
+						Java bean: onchange. If also print a message on the JavaScript console, both before and after the AJAX call.</p>
+					<b:selectBooleanCheckbox value="#{AJAXBean.bool2}" id="cbxId2"
+						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
+						update="messages @next" />
+					<b:label text="value of the combobox: #{AJAXBean.bool2}" />
+				</b:panel>
+				<b:panel look="primary" title="AJAXified Checkbox">
+					<p>This checkbox carries quite a few JavaScript callback
+						functions, which also call an actionlistener on the server-side
+						Java bean: onchange, onblur, onfocus, onclick, ondblclick,
+						onvaluechange and onselect.</p>
+					<b:selectBooleanCheckbox value="#{AJAXBean.bool3}" id="cbxId3"
+						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
+						onblur="console.log('blur');ajax:AJAXBean.onBlur()"
+						onfocus="console.log('focus');ajax:AJAXBean.onFocus()"
+						onclick="console.log('click');ajax:AJAXBean.onClick()"
+						ondblclick="console.log('dblclick');ajax:AJAXBean.onDblClick()"
+						onvaluechange="console.log('valueChange);ajax:AJAXBean.onValueChange()"
+						onselect="console.log('select');ajax:AJAXBean.onSelect()"
+						update="messages @next" />
+					<b:label text="value of the combobox: #{AJAXBean.bool3}" />
+				</b:panel>
+				<b:panel look="primary"
+					title="AJAXified Checkbox (full suite of events)">
+					<p>This checkbox carries quite a few JavaScript callback
+						functions, which also call an actionlistener on the server-side
+						Java bean: onchange, onblur, onfocus, onclick, ondblclick,
+						onkeydown, onkeyup, onmousedown, onmouseup, onmouseover,
+						onmouseout, onmousemove, onvaluechange and onselect.</p>
+					<b:selectBooleanCheckbox value="#{AJAXBean.bool4}" id="cbxId4"
 						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
 						onblur="console.log('blur');ajax:AJAXBean.onBlur()"
 						onfocus="console.log('focus');ajax:AJAXBean.onFocus()"
@@ -30,16 +66,16 @@
 						onvaluechange="console.log('valueChange);ajax:AJAXBean.onValueChange()"
 						onselect="console.log('select');ajax:AJAXBean.onSelect()"
 						update="messages @next" />
-					<b:label text="value of the combobox: #{AJAXBean.bool}" />
+					<b:label text="value of the combobox: #{AJAXBean.bool4}" />
 				</b:panel>
 			</b:column>
 			<b:column col-sm="6">
 				<b:well id="messages">
 	                Last action:
 	                <ul>
-					  <ui:repeat var="message" value="#{AJAXBean.messages}">
-						<li>#{message}</li>
-					  </ui:repeat>
+						<ui:repeat var="message" value="#{AJAXBean.messages}">
+							<li>#{message}</li>
+						</ui:repeat>
 					</ul>
 				</b:well>
 			</b:column>

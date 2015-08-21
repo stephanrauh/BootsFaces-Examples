@@ -8,7 +8,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean(name="AJAXBean")
+@ManagedBean(name = "AJAXBean")
 @SessionScoped
 public class AJAXBean {
 	private int counter = 0;
@@ -18,6 +18,42 @@ public class AJAXBean {
 	private List<String> messages = new ArrayList<>();
 
 	private boolean bool;
+	private boolean bool1;
+	private boolean bool2;
+	private boolean bool3;
+	private boolean bool4;
+
+	public boolean isBool1() {
+		return bool1;
+	}
+
+	public void setBool1(boolean bool1) {
+		this.bool1 = bool1;
+	}
+
+	public boolean isBool2() {
+		return bool2;
+	}
+
+	public void setBool2(boolean bool2) {
+		this.bool2 = bool2;
+	}
+
+	public boolean isBool3() {
+		return bool3;
+	}
+
+	public void setBool3(boolean bool3) {
+		this.bool3 = bool3;
+	}
+
+	public boolean isBool4() {
+		return bool4;
+	}
+
+	public void setBool4(boolean bool4) {
+		this.bool4 = bool4;
+	}
 
 	private String input = "Ignore the text. It's not important.";
 
@@ -27,7 +63,7 @@ public class AJAXBean {
 	}
 
 	private int brand = 1;
-	
+
 	public void clearMessages() {
 		messages.clear();
 	}
@@ -72,7 +108,7 @@ public class AJAXBean {
 	}
 
 	public String onChange() {
-		String event = " c	hange";
+		String event = " change";
 		report(event);
 		return "Hallo";
 	}
