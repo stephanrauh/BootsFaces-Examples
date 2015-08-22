@@ -51,6 +51,12 @@
 					<div style="height: 10px" />
                 to do
                 </b:tab>
+                <b:tab title="Icons" update="**:*messages"
+					onclick="ajax:AJAXBean.clearMessages()">
+					<div style="height: 10px" />
+                	<ui:include src="icon.xhtml"></ui:include>
+                </b:tab>
+                
 			</b:tabView>
 		</b:container>
 </h:body>

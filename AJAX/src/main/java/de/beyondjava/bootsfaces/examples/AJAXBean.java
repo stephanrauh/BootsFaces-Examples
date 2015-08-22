@@ -22,6 +22,34 @@ public class AJAXBean {
 	private boolean bool2;
 	private boolean bool3;
 	private boolean bool4;
+	
+	private boolean spinning=true;
+	private boolean readOnly=false;
+	private boolean disabled=true;
+
+	public boolean isSpinning() {
+		return spinning;
+	}
+
+	public void setSpinning(boolean spinning) {
+		this.spinning = spinning;
+	}
+
+	public boolean isReadOnly() {
+		return readOnly;
+	}
+
+	public void setReadOnly(boolean readOnly) {
+		this.readOnly = readOnly;
+	}
+
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
 
 	public boolean isBool1() {
 		return bool1;

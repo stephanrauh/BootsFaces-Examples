@@ -1,0 +1,62 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form>
+		<b:row>
+			<b:column col-sm="6">
+				<b:panel look="primary" title="AJAXified Gylphicon (b:icon)">
+					<b:icon name="globe" size="3x" spin="#{AJAXBean.spinning}" id="glyphicon" disabled="#{AJAXBean.disabled}" readonly="#{AJAXBean.readOnly}" 
+						onblur="console.log('blur');ajax:AJAXBean.onBlur()"
+						onfocus="console.log('focus');ajax:AJAXBean.onFocus()"
+						onclick="console.log('click');ajax:AJAXBean.onClick()"
+						ondblclick="console.log('dblclick');ajax:AJAXBean.onDblClick()"
+						onmousedown="console.log('mouse down');ajax:AJAXBean.onMouseDown();"
+						onmousemove="console.log('mouse move');ajax:AJAXBean.onMouseMove();"
+						onmouseout="console.log('mouse out');ajax:AJAXBean.onMouseOut();"
+						onmouseover="console.log('mouse over');ajax:AJAXBean.onMouseOver();"
+						onmouseup="console.log('mouse up');ajax:AJAXBean.onMouseUp();"
+						onmouseselect="console.log('mouse select');ajax:AJAXBean.onMouseSelect();"
+						update="messages" />
+						<b:selectBooleanCheckbox value="#{AJAXBean.spinning}" 
+						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
+						update="messages @form:**:*icon" label="spinning" />
+						<b:selectBooleanCheckbox value="#{AJAXBean.disabled}" 
+						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
+						update="messages @form:**:*icon" label="disabled" />
+						<b:selectBooleanCheckbox value="#{AJAXBean.readOnly}" 
+						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
+						update="messages @form:**:*icon" label="readOnly (not clickable, but not grayed out, either)" />
+				</b:panel>
+				<b:panel look="primary" title="AJAXified FontAwesome icon (b:icon)">
+					<b:iconAwesome name="futbol-o" size="3x" spin="#{AJAXBean.spinning}" disabled="#{AJAXBean.disabled}" readonly="#{AJAXBean.readOnly}" id="fontAwesomeicon"
+						onblur="console.log('blur');ajax:AJAXBean.onBlur()"
+						onfocus="console.log('focus');ajax:AJAXBean.onFocus()"
+						onclick="console.log('click');ajax:AJAXBean.onClick()"
+						ondblclick="console.log('dblclick');ajax:AJAXBean.onDblClick()"
+						onmousedown="console.log('mouse down');ajax:AJAXBean.onMouseDown();"
+						onmousemove="console.log('mouse move');ajax:AJAXBean.onMouseMove();"
+						onmouseout="console.log('mouse out');ajax:AJAXBean.onMouseOut();"
+						onmouseover="console.log('mouse over');ajax:AJAXBean.onMouseOver();"
+						onmouseup="console.log('mouse up');ajax:AJAXBean.onMouseUp();"
+						onmouseselect="console.log('mouse select');ajax:AJAXBean.onMouseSelect();"
+						update="messages" />
+				</b:panel>
+			</b:column>
+			<b:column col-sm="6">
+				<b:well id="messages">
+	                Last action:
+	                <ul>
+						<ui:repeat var="message" value="#{AJAXBean.messages}">
+							<li>#{message}</li>
+						</ui:repeat>
+					</ul>
+				</b:well>
+			</b:column>
+		</b:row>
+	</h:form>
+</ui:fragment>
