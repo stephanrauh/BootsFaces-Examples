@@ -53,7 +53,6 @@ public class ImageGallery implements Serializable {
 		int random = (int) Math.floor(Math.random() * imagePool.size());
 		images.set(index, imagePool.get(random));
 		imagePool.set(random, previousImage);
-		ajaxBean.standardJSFAction();
 	}
 
 	public void chooseEveryImage() {

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 @ManagedBean(name = "AJAXBean")
 @SessionScoped
@@ -238,11 +239,13 @@ public class AJAXBean {
 
 	public String standardJSFAction() {
 		report("Standard JSF action called");
-		return null;
+		return null; // "landingPage.jsf";
 	}
 
-	public String standardJSFActionListener() {
+	public void standardJSFActionListener() {
+		report("Standard JSF actionlistener without parameters called");
+	}
+	public void standardJSFActionListener(ActionEvent even) {
 		report("Standard JSF actionlistener called");
-		return null;
 	}
 }

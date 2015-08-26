@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<style>
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+	{
+	background-color: #ddd !important;
+}
+</style>
+</h:head>
+<h:body style="padding-top:75px">
+	<b:container>
+<h:form id="firstForm">
+    #{bean161.text}
+    <b:commandButton value="Change text and trigger Dialog" ajax="true" update="@form :secondForm"
+        action="#{bean161.setText('new text')}"
+        oncomplete="$('.modalPseudoClass').modal();return false;" />
+</h:form>
+
+<b:modal id="modalDialogID" styleClass="modalPseudoClass" title="My Modal">
+    <h:form id="secondForm">
+        #{bean161.text}
+        <br />
+        Closing this dialog will update the main form.
+        <b:commandButton value="OK" action="#{bean161.ok}" onclick="ajax:bean161.ok()" ajax="true" update=":firstForm" 
+        oncomplete="$('.modalPseudoClass').modal('hide');return false;" />
+        <b:commandButton value="cancel" />
+    </h:form>
+</b:modal>	</b:container>
+</h:body>
+</html>
