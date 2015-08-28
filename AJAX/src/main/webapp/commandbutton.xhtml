@@ -11,12 +11,7 @@
 			<b:column col-sm="6">
 				<ui:repeat id="some_elements" var="image"
 					value="#{imageGallery.images}">
-					<b:panelGrid colSpans="3,3,6">
-						<b:commandButton value="f:event" 
-							actionListener="#{imageGallery.chooseAnotherImage(image)}"
-							action="#{AJAXBean.standardJSFAction}">
-							 <f:ajax listener="#{AJAXBean.standardJSFActionListener}" update=":messages"></f:ajax>
-						</b:commandButton>
+					<b:panelGrid colSpans="3,9">
 						<b:commandButton value="Change image" ajax="true"
 							actionListener="#{imageGallery.chooseAnotherImage(image)}"
 							onclick="ajax:AJAXBean.onClick()"

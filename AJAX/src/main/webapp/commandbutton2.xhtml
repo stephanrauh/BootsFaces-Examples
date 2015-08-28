@@ -1,0 +1,50 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form>
+		<b:row>
+			<b:column col-sm="6">
+				<b:panel look="primary" title="AJAXified b:commandButton with f:ajax">
+	
+					<b:commandButton value="Change image" ajax="true"
+						update="@form:graphic @form:**:messages">
+						<f:ajax listener="#{AJAXBean.standardJSFActionListener}" render="@next **:messages"></f:ajax>
+					</b:commandButton>
+					<h:graphicImage url="#{imageGallery.singleImage}" id="graphic"
+						style="width:233px; height:178px" />
+				</b:panel>
+				<b:panel look="primary" title="AJAXified b:commandButton with f:ajax">
+	
+					<b:commandButton value="Change image" ajax="true"
+						update="@form:graphic3 @form:**:messages">
+						<f:ajax listener="#{AJAXBean.standardJSFActionListener}" action="#{AJAXBean.standardJSFAction}" render="**:messages"></f:ajax>
+					</b:commandButton>
+					<h:graphicImage url="#{imageGallery.singleImage}" id="graphic3"
+						style="width:233px; height:178px" />
+				</b:panel>
+				<b:panel look="primary" title="AJAXified b:commandButton with JavaScript callback handlers">
+					<b:commandButton value="Change image" ajax="true"
+						actionListener="#{imageGallery.chooseAnotherImage()}"
+						onclick="ajax:AJAXBean.onClick()"
+						action="#{AJAXBean.standardJSFAction}"
+						update="@form:graphic2 @form:**:messages" />
+					<h:graphicImage url="#{imageGallery.singleImage}" id="graphic2"
+						style="width:233px; height:178px" />
+				</b:panel>
+			</b:column>
+			<b:column col-sm="6">
+				<b:well id="messages">
+	                Last action:
+	                <ul>
+					  <ui:repeat var="message" value="#{AJAXBean.messages}">
+						<li>#{message}</li>
+					  </ui:repeat>
+					</ul>
+				</b:well>
+			</b:column>
+		</b:row>
+	</h:form>
+</ui:fragment>

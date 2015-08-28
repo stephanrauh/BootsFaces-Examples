@@ -15,6 +15,8 @@ public class ImageGallery implements Serializable {
 
 	@ManagedProperty("#{AJAXBean}")
 	private AJAXBean ajaxBean;
+	
+	private String singleImage="http://www.11pictures.com/foto/stories/Camargue_2013_Nature/framedPreview.png";
 
 	private List<String> images = new ArrayList<String>() {
 		{
@@ -55,6 +57,11 @@ public class ImageGallery implements Serializable {
 		imagePool.set(random, previousImage);
 	}
 
+	public void chooseAnotherImage() {
+		int random = (int) Math.floor(Math.random() * imagePool.size());
+		singleImage= imagePool.get(random);
+	}
+
 	public void chooseEveryImage() {
 		for (int index = 0; index < images.size(); index++) {
 			String previousImage = images.get(index);
@@ -62,5 +69,13 @@ public class ImageGallery implements Serializable {
 			images.set(index, imagePool.get(random));
 			imagePool.set(random, previousImage);
 		}
+	}
+
+	public String getSingleImage() {
+		return singleImage;
+	}
+
+	public void setSingleImage(String image) {
+		this.singleImage = image;
 	}
 }

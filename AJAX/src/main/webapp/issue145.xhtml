@@ -1,7 +1,8 @@
  <!DOCTYPE html>
     <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+    xmlns:b="http://bootsfaces.net/ui" 
+    xmlns:p="http://primefaces.org/ui"
     xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
     <title>Really simple CRUD</title>
@@ -13,7 +14,7 @@
     </h:panelGroup>
     <h:panelGroup id="panelAdd">
 
-        <h:form id="formAdd" rendered="#{!bean.edit}">
+        <h:form id="formAdd" rendered="#{!bean.editable}">
             <h3>Add item</h3>
             <p>
                 Value:
@@ -26,7 +27,7 @@
     </h:panelGroup>
     <h:panelGroup id="panelEdit">
 
-        <h:form id="formEdit" rendered="#{bean.edit}">
+        <h:form id="formEdit" rendered="#{bean.editable}">
             <h3>Edit item #{bean.item.id}</h3>
             <p>
                 Value:
@@ -53,7 +54,7 @@
                     update=":panelEdit :panelAdd :formEdit :formAdd" ajax="true" />
 
                 <h:commandButton value="edit with jsf ajax (working)"
-                    action="#{bean.edit(item)}">
+                    action="#{bean.edit(item)}"> 
                     <f:ajax render=":panelEdit :panelAdd :formEdit :formAdd"
                         execute="@form" />
                 </h:commandButton>
