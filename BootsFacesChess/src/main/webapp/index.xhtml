@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:b="http://bootsfaces.net/ui"
+  xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+  <style>
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+	{
+	background-color: #ddd !important;
+}
+</style>
+</h:head>
+<h:body style="padding-top:75px">
+  <b:container id="menu">
+    <b:navBar brand="BootsFaces plays chess!" inverse="true" brandHref="#"
+      fixed="top">
+      <b:navbarLinks>
+        <b:navLink value="New game (white)" iconAwesome="home" href="#"></b:navLink>
+        <b:navLink value="New game (black)" icon="cross" href="#"></b:navLink>
+        <b:navLink value="Flip sides" href="#"></b:navLink>
+        <b:navLink value="Quit" href="#"></b:navLink>
+      </b:navbarLinks>
+    </b:navBar>
+  </b:container>
+
+  <b:container id="content">
+    <ui:repeat id="rows" var="row" value="#{board.rows}">
+      <ui:repeat id="fields" var="image" value="#{row.images}">
+
+        <b:image value="#{image}" style="width:70px;height:70px" />
+      </ui:repeat>
+      <br />
+    </ui:repeat>
+  </b:container>
+</h:body>
+</html>
