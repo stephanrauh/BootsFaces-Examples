@@ -14,8 +14,8 @@
 </h:head>
 <h:body style="padding-top:75px">
   <b:container id="menu">
-    <b:navBar brand="BootsFaces plays chess!" inverse="true" brandHref="#"
-      fixed="top">
+    <b:navBar brand="BootsFaces plays chess!" inverse="true"
+      brandHref="#" fixed="top">
       <b:navbarLinks>
         <b:navLink value="New game (white)" iconAwesome="home" href="#"></b:navLink>
         <b:navLink value="New game (black)" icon="cross" href="#"></b:navLink>
@@ -26,13 +26,20 @@
   </b:container>
 
   <b:container id="content">
-    <ui:repeat id="rows" var="row" value="#{board.rows}">
-      <ui:repeat id="fields" var="image" value="#{row.images}">
+    <h:form>
+      <ui:repeat id="rows" var="row" value="#{board.rows}"
+        varStatus="rowStatus">
+        <ui:repeat id="fields" var="image" value="#{row.images}"
+          varStatus="columnStatus">
 
-        <b:image value="#{image}" style="width:70px;height:70px" />
+          <b:image value="#{image}"
+            style="width:70px;height:70px;opacity:#{board.getOpacity(rowStatus.index,columnStatus.index)}"
+            onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
+            update="@form" />
+        </ui:repeat>
+        <br />
       </ui:repeat>
-      <br />
-    </ui:repeat>
+    </h:form>
   </b:container>
 </h:body>
 </html>

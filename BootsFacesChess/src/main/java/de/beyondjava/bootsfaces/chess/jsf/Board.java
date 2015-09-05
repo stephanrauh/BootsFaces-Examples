@@ -16,10 +16,20 @@ public class Board implements Serializable {
 	
 	private Chessboard chessboard = new Chessboard();
 	
+	private boolean isPieceSelected=false;
+	
+	private int selectedPieceRow;
+	
+	private int selectedPieceColumn;
+	
 	private List<Row> rows;
 	
 	public Board() {
 		
+		redraw();
+	}
+
+	private void redraw() {
 		int[][] pieces = chessboard.board;
 		setRows(new ArrayList<Row>());
 		for (int i = 0; i < 8; i++) {
@@ -33,6 +43,25 @@ public class Board implements Serializable {
 
 	public void setRows(List<Row> rows) {
 		this.rows = rows;
+	}
+	
+	public String getOpacity(int row, int column) {
+		if (!isPieceSelected) return "1.0";
+		if (selectedPieceColumn==column && selectedPieceRow==row) return "1.0";
+		return "0.7";
+	}
+	
+	public void onclick(int row, int column) {
+		if (isPieceSelected) {
+			isPieceSelected=false;
+		}
+		else
+		{
+			isPieceSelected=true;
+			selectedPieceRow=row;
+			selectedPieceColumn=column;
+		}
+		redraw();
 	}
 
 }
