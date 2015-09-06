@@ -8,8 +8,11 @@
 		<b:row>
 			<b:column col-sm="6">
 				<b:panel look="primary" title="AJAXified b:commandButton with f:ajax">
-	
-					<b:commandButton value="Change image" ajax="true"
+
+					<h:commandButton value="Change image" action="#{imageGallery.chooseAnotherImage()}">
+						<f:ajax listener="#{AJAXBean.facetListener}" render="@form"></f:ajax>
+					</h:commandButton>
+					<b:commandButton value="Change image" ajax="true" action="#{imageGallery.chooseAnotherImage()}"
 						update="@form:graphic @form:**:messages">
 						<f:ajax listener="#{AJAXBean.standardJSFActionListener}" render="@next **:messages"></f:ajax>
 					</b:commandButton>

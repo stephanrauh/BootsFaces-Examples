@@ -27,6 +27,7 @@ public class AJAXBean {
 	private boolean spinning=true;
 	private boolean readOnly=false;
 	private boolean disabled=true;
+	private boolean buttonRed=false;
 
 	public boolean isSpinning() {
 		return spinning;
@@ -241,11 +242,35 @@ public class AJAXBean {
 		report("Standard JSF action called");
 		return null; // "landingPage.jsf";
 	}
+	
+	public void facetListener(javax.faces.event.AjaxBehaviorEvent event) throws javax.faces.event.AbortProcessingException {
+		report("f:ajax listener called");
+	}
+	
+	public void mouseOverListener(javax.faces.event.AjaxBehaviorEvent event) throws javax.faces.event.AbortProcessingException {
+		report("f:ajax mouseOver listener called");
+		buttonRed=true;
+	}
+
+	
+	public void mouseOutListener(javax.faces.event.AjaxBehaviorEvent event) throws javax.faces.event.AbortProcessingException {
+		report("f:ajax mouseOut listener called");
+		buttonRed=false;
+	}
+
 
 	public void standardJSFActionListener() {
 		report("Standard JSF actionlistener without parameters called");
 	}
 	public void standardJSFActionListener(ActionEvent even) {
 		report("Standard JSF actionlistener called");
+	}
+
+	public boolean isButtonRed() {
+		return buttonRed;
+	}
+
+	public void setButtonRed(boolean buttonRed) {
+		this.buttonRed = buttonRed;
 	}
 }

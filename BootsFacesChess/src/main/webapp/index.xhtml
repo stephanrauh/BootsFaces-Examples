@@ -26,19 +26,25 @@
   </b:container>
 
   <b:container id="content">
-    <h:form>
-      <ui:repeat id="rows" var="row" value="#{board.rows}"
-        varStatus="rowStatus">
-        <ui:repeat id="fields" var="image" value="#{row.images}"
-          varStatus="columnStatus">
+    <h:form id="form">
+      <b:panel title="#{board.startOpponentsMove?'Calculating next move...':'Waiting for your move'}"  id="board">
+        <ui:repeat id="rows" var="row" value="#{board.rows}"
+          varStatus="rowStatus">
+          <ui:repeat id="fields" var="image" value="#{row.images}"
+            varStatus="columnStatus">
 
-          <b:image value="#{image}"
-            style="width:70px;height:70px;opacity:#{board.getOpacity(rowStatus.index,columnStatus.index)}"
-            onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
-            update="@form" />
+            <b:image value="#{image}"
+              style="width:70px;height:70px;opacity:#{board.getOpacity(rowStatus.index,columnStatus.index)}"
+              onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
+              oncomplete="document.getElementById('form:opponent').click()"
+              update="@form" />
+          </ui:repeat>
+
+          <br />
         </ui:repeat>
-        <br />
-      </ui:repeat>
+      </b:panel>
+      <b:commandButton value="computer's move" id="opponent" actionListener="#{board.opponentsMove}" ajax="true" update="@form" style="display:none" />
+      <b:commandButton value="flip sides" actionListener="#{board.flipSides}" ajax="true" update="@form" />
     </h:form>
   </b:container>
 </h:body>

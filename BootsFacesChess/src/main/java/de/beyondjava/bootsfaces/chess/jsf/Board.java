@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 import de.beyondjava.bootsfaces.chess.Exceptions.EndOfGameException;
 import de.beyondjava.bootsfaces.chess.common.ChessConstants;
@@ -27,8 +28,9 @@ public class Board implements Serializable {
 
 	private List<Row> rows;
 
-	public Board() {
+	private boolean startOpponentsMove = false;
 
+	public Board() {
 		redraw();
 	}
 
@@ -49,13 +51,14 @@ public class Board implements Serializable {
 	}
 
 	public String getOpacity(int row, int column) {
+		if (startOpponentsMove) return "0.7";
 		if (!isPieceSelected)
 			return "1.0";
 		if (selectedPieceColumn == column && selectedPieceRow == row)
 			return "1.0";
 		if (chessboard.isMovePossible(selectedPieceRow, selectedPieceColumn, row, column))
 			return "1.0";
-		return "0.7";
+		return "0.8";
 	}
 
 	public void onclick(int row, int column) {
@@ -69,16 +72,10 @@ public class Board implements Serializable {
 
 				chessboard = chessboard.moveChessPiece(selectedPieceRow, selectedPieceColumn, row, column,
 						ChessConstants.W_QUEEN);
-				selectedPieceRow=0;
-				selectedPieceColumn=0;
-				try {
-					Move move = chessboard.findBestMove();
-					chessboard = chessboard.moveChessPiece(move.fromRow, move.fromColumn, move.toRow, move.toColumn,
-							ChessConstants.W_QUEEN);
-				} catch (EndOfGameException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				selectedPieceRow = 0;
+				selectedPieceColumn = 0;
+				// opponentsMove();
+				startOpponentsMove = true;
 			}
 
 		} else {
@@ -92,6 +89,33 @@ public class Board implements Serializable {
 			}
 		}
 		redraw();
+	}
+
+	public void opponentsMove(ActionEvent event) {
+		if (startOpponentsMove) {
+			startOpponentsMove = false;
+			try {
+				Move move = chessboard.findBestMove();
+				chessboard = chessboard.moveChessPiece(move.fromRow, move.fromColumn, move.toRow, move.toColumn,
+						ChessConstants.W_QUEEN);
+			} catch (EndOfGameException e) {
+				e.printStackTrace();
+			}
+			redraw();
+		}
+	}
+
+	public boolean isStartOpponentsMove() {
+		return startOpponentsMove;
+	}
+
+	public void setStartOpponentsMove(boolean startOppenentsMove) {
+		this.startOpponentsMove = startOppenentsMove;
+	}
+	
+	public void flipSides(ActionEvent event) {
+		startOpponentsMove=true;
+		opponentsMove(event);
 	}
 
 }
