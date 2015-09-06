@@ -178,7 +178,7 @@ public class ChessboardBasis implements ChessConstants {
         return (((piece / 2) % 2) == 1);
     }
 
-    protected boolean isActivePlayersPiece(int piece) {
+    public boolean isActivePlayersPiece(int piece) {
         return activePlayerIsWhite == isWhitePiece(piece);
     }
 

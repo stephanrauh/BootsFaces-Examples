@@ -11,7 +11,9 @@ public class Row implements Serializable {
 	public Row(int row, int[] pieces) {
 		int background = 1-row%2;
 		for (int col=0; col<pieces.length; col++) {
-			fileNames.add("wikimediaimages/" + ImageNames.chessPiecesFileName[pieces[col]+background]);
+			int piece = pieces[col];
+			if (piece<0) piece=0; // treat en-passant-fields as empty fields
+			fileNames.add("wikimediaimages/" + ImageNames.chessPiecesFileName[piece+background]);
 			background=1-background;
 		}
 	}
