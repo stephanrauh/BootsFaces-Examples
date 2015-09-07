@@ -26,6 +26,7 @@
   </b:container>
 
   <b:container id="content">
+    <b:messages id="messages" showDetail="false" showSummary="false" />
     <h:form id="form">
       <b:row>
         <b:column span="7">
@@ -42,7 +43,7 @@
                     style="width:70px;height:70px;;display:inline-block;#{board.getOpacityAndBorder(rowStatus.index,columnStatus.index)}"
                     onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
                     oncomplete="document.getElementById('form:opponent').click()"
-                    update="@form" />
+                    update="@form :messages" />
                 </ui:repeat>
               </div>
             </ui:repeat>
@@ -51,7 +52,7 @@
         <b:column span="5">
           <b:panel title="History" contentStyle="height:250px">
           </b:panel>
-          <b:panel title="Settings" contentStyle="height:150px">
+          <b:panel title="Settings #{settings.economyMode?' (restricted to save CPU time)':''}" contentStyle="height:150px">
             <b:panelGrid colSpans="6,6">
               <h:outputText value="Look-ahead:" />
               <b:inputText value="#{settings.lookAhead}" />
@@ -83,6 +84,6 @@
       <b:commandButton value="flip sides"
         actionListener="#{board.flipSides}" ajax="true" update="@form" />
     </h:form>
-  </b:container>
+   </b:container>
 </h:body>
 </html>

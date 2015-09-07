@@ -5,21 +5,28 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import de.beyondjava.bootsfaces.chess.Exceptions.EndOfGameException;
 import de.beyondjava.bootsfaces.chess.common.ChessConstants;
 import de.beyondjava.bootsfaces.chess.common.Move;
+import de.beyondjava.bootsfaces.chess.common.Settings;
 import de.beyondjava.bootsfaces.chess.objectOrientedEngine.Chessboard;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class Board implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Chessboard chessboard = new Chessboard();
+	
+	@ManagedProperty("#{settings}")
+	private Settings settings;
 
 	private boolean isPieceSelected = false;
 
@@ -56,6 +63,14 @@ public class Board implements Serializable {
 	}
 
 	public Board() {
+	}
+	
+	@PostConstruct
+	public void postInit() {
+		String serverName=FacesContext.getCurrentInstance().getExternalContext().getRequestServerName();
+		if ("127.0.0.1".equals(serverName) || "localhost".equals(serverName)) {
+			settings.unlockPowerMode();
+		}
 		redraw();
 	}
 
@@ -147,6 +162,14 @@ public class Board implements Serializable {
 	public void flipSides(ActionEvent event) {
 		startOpponentsMove = true;
 		opponentsMove(event);
+	}
+
+	public Settings getSettings() {
+		return settings;
+	}
+
+	public void setSettings(Settings settings) {
+		this.settings = settings;
 	}
 
 }
