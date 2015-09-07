@@ -33,15 +33,6 @@ public interface ChessConstants {
             {4, 4, 4, 4, 4, 4, 4, 4},
             {8, 12, 16, 20, 24, 16, 12, 8}
     };
-    public static final int[] INITIAL_LINEAR_BOARD = {6, 10, 14, 18, 22, 14, 10, 6,
-            2, 2, 2, 2, 2, 2, 2, 2,
-            0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0,
-            4, 4, 4, 4, 4, 4, 4, 4,
-            8, 12, 16, 20, 24, 16, 12, 8
-    };
     public static final int[] s_MATERIAL_VALUE = {0, 0, // empty fields
             100, 100, 100, 100, // pawns
             500, 500, 500, 500, // rooks,

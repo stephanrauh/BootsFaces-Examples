@@ -27,24 +27,61 @@
 
   <b:container id="content">
     <h:form id="form">
-      <b:panel title="#{board.startOpponentsMove?'Calculating next move...':'Waiting for your move'}"  id="board">
-        <ui:repeat id="rows" var="row" value="#{board.rows}"
-          varStatus="rowStatus">
-          <ui:repeat id="fields" var="image" value="#{row.images}"
-            varStatus="columnStatus">
+      <b:row>
+        <b:column span="7">
+          <b:panel
+            title="#{board.startOpponentsMove?'Calculating next move...':'Waiting for your move'}"
+            id="board" contentStyle="height:600px">
+            <ui:repeat id="rows" var="row" value="#{board.rows}"
+              varStatus="rowStatus">
+              <div style="width: 560px; height: 70px; overflow: auto;">
+                <ui:repeat id="fields" var="image" value="#{row.images}"
+                  varStatus="columnStatus">
 
-            <b:image value="#{image}"
-              style="width:70px;height:70px;opacity:#{board.getOpacity(rowStatus.index,columnStatus.index)}"
-              onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
-              oncomplete="document.getElementById('form:opponent').click()"
-              update="@form" />
-          </ui:repeat>
+                  <b:image value="#{image}"
+                    style="width:70px;height:70px;;display:inline-block;#{board.getOpacityAndBorder(rowStatus.index,columnStatus.index)}"
+                    onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
+                    oncomplete="document.getElementById('form:opponent').click()"
+                    update="@form" />
+                </ui:repeat>
+              </div>
+            </ui:repeat>
+          </b:panel>
+        </b:column>
+        <b:column span="5">
+          <b:panel title="History" contentStyle="height:250px">
+          </b:panel>
+          <b:panel title="Settings" contentStyle="height:150px">
+            <b:panelGrid colSpans="6,6">
+              <h:outputText value="Look-ahead:" />
+              <b:inputText value="#{settings.lookAhead}" />
+              <h:outputText value="Calculation breadth:" />
+              <b:inputText value="#{settings.movesToConsider}" />
+              <h:outputText value="multithreading" />
+              <b:selectBooleanCheckbox value="#{settings.multithreading}" />
+            </b:panelGrid>
+          </b:panel>
 
-          <br />
-        </ui:repeat>
-      </b:panel>
-      <b:commandButton value="computer's move" id="opponent" actionListener="#{board.opponentsMove}" ajax="true" update="@form" style="display:none" />
-      <b:commandButton value="flip sides" actionListener="#{board.flipSides}" ajax="true" update="@form" />
+          <b:panel title="statistics" contentStyle="height:80px">
+            <b:panelGrid colSpans="6,6">
+              <h:outputText value="Elapsed time:" />
+              <h:outputText value="#{board.elapsedTime}" />
+              <h:outputText value="CPU time:" />
+              <h:outputText value="#{board.cpuTime}" />
+              <h:outputText value="evaluated moves:" />
+              <h:outputText value="#{board.evaluatedMoves}" />
+            </b:panelGrid>
+
+
+
+          </b:panel>
+        </b:column>
+      </b:row>
+      <b:commandButton value="computer's move" id="opponent"
+        actionListener="#{board.opponentsMove}" ajax="true"
+        update="@form" style="display:none" />
+      <b:commandButton value="flip sides"
+        actionListener="#{board.flipSides}" ajax="true" update="@form" />
     </h:form>
   </b:container>
 </h:body>

@@ -1,6 +1,7 @@
 package de.beyondjava.bootsfaces.chess.jsf;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,30 @@ public class Board implements Serializable {
 
 	private boolean startOpponentsMove = false;
 
+	private String elapsedTime;
+
+	private String evaluatedMoves;
+
+	private String cpuTime;
+
+	String averageEvaluation;
+
+	public String getElapsedTime() {
+		return elapsedTime;
+	}
+
+	public String getEvaluatedMoves() {
+		return evaluatedMoves;
+	}
+
+	public String getCpuTime() {
+		return cpuTime;
+	}
+
+	public String getAverageEvaluation() {
+		return averageEvaluation;
+	}
+
 	public Board() {
 		redraw();
 	}
@@ -50,15 +75,16 @@ public class Board implements Serializable {
 		this.rows = rows;
 	}
 
-	public String getOpacity(int row, int column) {
-		if (startOpponentsMove) return "0.7";
+	public String getOpacityAndBorder(int row, int column) {
+		if (startOpponentsMove)
+			return "opacity:0.7;border:1px solid black";
 		if (!isPieceSelected)
-			return "1.0";
+			return "opacity:1.0;border:1px solid black";
 		if (selectedPieceColumn == column && selectedPieceRow == row)
-			return "1.0";
+			return "opacity:1.0;border: 2px solid blue;";
 		if (chessboard.isMovePossible(selectedPieceRow, selectedPieceColumn, row, column))
-			return "1.0";
-		return "0.8";
+			return "opacity:1.0;border: 2px solid red;";
+		return "opacity:1.0;border: 1px solid black";
 	}
 
 	public void onclick(int row, int column) {
@@ -101,6 +127,11 @@ public class Board implements Serializable {
 			} catch (EndOfGameException e) {
 				e.printStackTrace();
 			}
+		       elapsedTime = ((Chessboard.realTimeOfCalculation / 1000) / 1000.0d) + "ms";
+		        cpuTime= ((Chessboard.totalTime/1000)/1000) + " ms";
+		        evaluatedMoves=NumberFormat.getInstance().format( Chessboard.evaluatedPositions);
+		        averageEvaluation=Chessboard.totalTime/chessboard.evaluatedPositions + " ns";
+
 			redraw();
 		}
 	}
@@ -112,9 +143,9 @@ public class Board implements Serializable {
 	public void setStartOpponentsMove(boolean startOppenentsMove) {
 		this.startOpponentsMove = startOppenentsMove;
 	}
-	
+
 	public void flipSides(ActionEvent event) {
-		startOpponentsMove=true;
+		startOpponentsMove = true;
 		opponentsMove(event);
 	}
 
