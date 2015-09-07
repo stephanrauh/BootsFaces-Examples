@@ -16,7 +16,10 @@ import javax.faces.event.ActionEvent;
 import de.beyondjava.bootsfaces.chess.common.ChessConstants;
 import de.beyondjava.bootsfaces.chess.common.Move;
 import de.beyondjava.bootsfaces.chess.common.Settings;
+import de.beyondjava.bootsfaces.chess.exceptions.BlackIsCheckMateException;
 import de.beyondjava.bootsfaces.chess.exceptions.EndOfGameException;
+import de.beyondjava.bootsfaces.chess.exceptions.StaleMateException;
+import de.beyondjava.bootsfaces.chess.exceptions.WhiteIsCheckMateException;
 import de.beyondjava.bootsfaces.chess.objectOrientedEngine.Chessboard;
 
 @ManagedBean
@@ -48,6 +51,8 @@ public class Board implements Serializable {
 
 	private boolean endOfGame = false;
 	
+	private boolean blackIsTop=true;
+	
 	private EndOfGameException gameOverException;
 
 	@ManagedProperty("#{settings}")
@@ -59,7 +64,24 @@ public class Board implements Serializable {
 	}
 
 	public void flipSides(ActionEvent event) {
+		blackIsTop=!blackIsTop;
 		startOpponentsMove = true;
+		opponentsMove(event);
+	}
+
+	public void newGameWhite(ActionEvent event) {
+		chessboard = new Chessboard();
+		history.clear();
+		endOfGame=false;
+		isPieceSelected=false;
+		blackIsTop=true;
+		redraw();
+	}
+
+	public void newGameBlack(ActionEvent event) {
+		newGameWhite(null);
+		blackIsTop=false;
+		startOpponentsMove=true;
 		opponentsMove(event);
 	}
 
@@ -88,6 +110,10 @@ public class Board implements Serializable {
 	}
 
 	public String getOpacityAndBorder(int row, int column) {
+		if (!blackIsTop) {
+			row=7-row;
+			column=7-column;
+		}
 		if (startOpponentsMove)
 			return "opacity:0.7;border:1px solid black";
 		if (!isPieceSelected)
@@ -109,7 +135,13 @@ public class Board implements Serializable {
 
 	public String getTitle() {
 		if (endOfGame) {
-			return "Game over." + gameOverException.getClass().getSimpleName();
+			if (gameOverException instanceof WhiteIsCheckMateException)
+				return "White is checkmate!";
+			if (gameOverException instanceof BlackIsCheckMateException)
+				return "Black is checkmate!";
+			if (gameOverException instanceof StaleMateException)
+				return "Stalemate!";
+			return "Game over. " + gameOverException.getClass().getSimpleName();
 		} else if (startOpponentsMove)
 			return "Calculating next move...";
 		else
@@ -125,6 +157,10 @@ public class Board implements Serializable {
 			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "The game is already over.");
 			FacesContext.getCurrentInstance().addMessage(null, fm);
 		} else {
+			if (!blackIsTop) {
+				row=7-row;
+				column=7-column;
+			}
 			if (isPieceSelected) {
 				isPieceSelected = false;
 				if (chessboard.isMovePossible(selectedPieceRow, selectedPieceColumn, row, column)) {
@@ -139,6 +175,9 @@ public class Board implements Serializable {
 							capturedPiece > ChessConstants.W_EMPTY, capturedPiece);
 					info = m.toString();
 					String move = m.getNotation();
+					if (history.size()%2==0) {
+						move = String.valueOf((history.size()/2)+1) + ". " + move;
+					}
 					history.add(move);
 					selectedPieceRow = 0;
 					selectedPieceColumn = 0;
@@ -164,14 +203,19 @@ public class Board implements Serializable {
 		if (endOfGame) {
 			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "The game is already over.");
 			FacesContext.getCurrentInstance().addMessage(null, fm);
+			startOpponentsMove = false;
 		} else {
 			if (startOpponentsMove) {
 				startOpponentsMove = false;
 				try {
-					Move move = chessboard.findBestMove();
-					history.add(move.getNotation());
+					Move m = chessboard.findBestMove();
+					String move = m.getNotation();
+					if (history.size()%2==0) {
+						move = String.valueOf((history.size()/2)+1) + ". " + move;
+					}
+					history.add(move);
 					info = move.toString();
-					chessboard = chessboard.moveChessPiece(move.fromRow, move.fromColumn, move.toRow, move.toColumn,
+					chessboard = chessboard.moveChessPiece(m.fromRow, m.fromColumn, m.toRow, m.toColumn,
 							ChessConstants.W_QUEEN);
 				} catch (EndOfGameException e) {
 					FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "The game is already over.");
@@ -202,8 +246,16 @@ public class Board implements Serializable {
 	private void redraw() {
 		int[][] pieces = chessboard.board;
 		setRows(new ArrayList<Row>());
-		for (int i = 0; i < 8; i++) {
-			getRows().add(new Row(i, pieces[i]));
+		if (blackIsTop) {
+			for (int i = 0; i < 8; i++) {
+				getRows().add(new Row(i, pieces[i], false));
+			}
+		}
+		else {
+			for (int i = 7; i >=0; i--) {
+				getRows().add(new Row(i, pieces[i], true));
+			}
+			
 		}
 	}
 

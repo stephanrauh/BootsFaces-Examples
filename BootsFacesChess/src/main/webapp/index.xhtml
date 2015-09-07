@@ -13,34 +13,39 @@
 }
 </style>
 </h:head>
-<h:body style="padding-top:75px">
+<h:body style="padding-top:55px">
   <b:container id="menu">
-    <b:navBar brand="BootsFaces plays chess!" inverse="true"
-      brandHref="#" fixed="top">
-      <b:navbarLinks>
-        <b:navLink value="New game (white)" iconAwesome="home" href="#"></b:navLink>
-        <b:navLink value="New game (black)" icon="cross" href="#"></b:navLink>
-        <b:navLink value="Flip sides" href="#"></b:navLink>
-        <b:navLink value="Quit" href="#"></b:navLink>
-      </b:navbarLinks>
-    </b:navBar>
+    <h:form>
+      <b:navBar brand="BootsFaces plays chess!" inverse="true"
+        brandHref="#" fixed="top">
+        <b:navbarLinks>
+          <b:navCommandLink value="New game (white)" iconAwesome="home"
+            actionListener="#{board.newGameWhite}" ajax="true"
+            update=":content" />
+          <b:navCommandLink value="New game (black)" icon="cross" actionListener="#{board.newGameBlack}" ajax="true"
+            update=":content" />
+          <b:navCommandLink value="Flip sides"
+            actionListener="#{board.flipSides}" ajax="true"
+            update=":content" />
+          <b:navLink value="About" href="#"></b:navLink>
+        </b:navbarLinks>
+      </b:navBar>
+    </h:form>
   </b:container>
 
   <b:container id="content">
-    <h:form id="form">
+    <h:form id="form" style="margin-bottom:-10px">
       <b:row>
         <b:column span="8">
-          <b:panel
-            title="#{board.title}"
-            id="board" contentStyle="height:600px">
+          <b:panel title="#{board.title}" id="board" look="info"
+            contentStyle="height:580px">
             <ui:repeat id="rows" var="row" value="#{board.rows}"
               varStatus="rowStatus">
-              <div style="width: 560px; height: 70px; overflow: auto;">
+              <div style="width: 560px; height: 68px; overflow: auto;">
                 <ui:repeat id="fields" var="image" value="#{row.images}"
                   varStatus="columnStatus">
-
                   <b:image value="#{image}"
-                    style="width:70px;height:70px;;display:inline-block;#{board.getOpacityAndBorder(rowStatus.index,columnStatus.index)}"
+                    style="width:68px;height:68px;;display:inline-block;#{board.getOpacityAndBorder(rowStatus.index,columnStatus.index)}"
                     onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
                     oncomplete="document.getElementById('form:opponent').click()"
                     update="@form :messages" />
@@ -50,21 +55,22 @@
           </b:panel>
         </b:column>
         <b:column span="4">
-          <b:panel title="History" contentStyle="height:250px">
-            <b:panelGrid id="historyGrid" colSpans="4,8" style="width:300px;height:230px;overflow-y: auto;overflow-x:hidden">
+          <b:panel title="History" contentStyle="height:240px" look="info">
+            <b:panelGrid id="historyGrid" colSpans="5,7"
+              style="width:300px;height:220px;overflow-y: auto;overflow-x:hidden">
               <c:forEach items="#{board.history}" var="move">
                 <h:outputText value="#{move}" />
               </c:forEach>
             </b:panelGrid>
             <script>
-              debugger;
-              var grid = document.getElementById('form:historyGrid');
-              grid.scrollTop = grid.scrollHeight;
-            </script>
+													var grid = document
+															.getElementById('form:historyGrid');
+													grid.scrollTop = grid.scrollHeight;
+												</script>
           </b:panel>
-          <b:panel
+          <b:panel look="info"
             title="Settings #{settings.economyMode?' (restricted to save CPU time)':''}"
-            contentStyle="height:150px">
+            contentStyle="height:140px">
             <b:panelGrid colSpans="6,6">
               <h:outputText value="Look-ahead:" />
               <b:inputText value="#{settings.lookAhead}" />
@@ -76,7 +82,7 @@
             </b:panelGrid>
           </b:panel>
 
-          <b:panel title="statistics" contentStyle="height:80px">
+          <b:panel title="statistics" contentStyle="height:80px" look="info">
             <b:panelGrid colSpans="6,6">
               <h:outputText value="Elapsed time:" />
               <h:outputText value="#{board.elapsedTime}" />
@@ -91,10 +97,8 @@
       <b:commandButton value="computer's move" id="opponent"
         actionListener="#{board.opponentsMove}" ajax="true"
         update="@form" style="display:none" />
-      <b:commandButton value="flip sides"
-        actionListener="#{board.flipSides}" ajax="true" update="@form" />
     </h:form>
-    <b:messages id="messages" showDetail="false" showSummary="false" />
+    <b:messages id="messages" showDetail="false" showSummary="false"/>
   </b:container>
 </h:body>
 </html>
