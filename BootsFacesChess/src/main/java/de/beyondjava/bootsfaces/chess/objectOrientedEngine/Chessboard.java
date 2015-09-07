@@ -12,14 +12,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import de.beyondjava.bootsfaces.chess.Exceptions.BlackIsCheckMateException;
-import de.beyondjava.bootsfaces.chess.Exceptions.EndOfGameException;
-import de.beyondjava.bootsfaces.chess.Exceptions.KingLostException;
-import de.beyondjava.bootsfaces.chess.Exceptions.StaleMateException;
-import de.beyondjava.bootsfaces.chess.Exceptions.WhiteIsCheckMateException;
 import de.beyondjava.bootsfaces.chess.common.Move;
 import de.beyondjava.bootsfaces.chess.common.Piece;
 import de.beyondjava.bootsfaces.chess.common.Settings;
+import de.beyondjava.bootsfaces.chess.exceptions.BlackIsCheckMateException;
+import de.beyondjava.bootsfaces.chess.exceptions.EndOfGameException;
+import de.beyondjava.bootsfaces.chess.exceptions.KingLostException;
+import de.beyondjava.bootsfaces.chess.exceptions.StaleMateException;
+import de.beyondjava.bootsfaces.chess.exceptions.WhiteIsCheckMateException;
 
 public class Chessboard extends ChessboardBasis {
 

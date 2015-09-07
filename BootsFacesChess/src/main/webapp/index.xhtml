@@ -2,7 +2,8 @@
   xmlns:h="http://java.sun.com/jsf/html"
   xmlns:ui="http://java.sun.com/jsf/facelets"
   xmlns:b="http://bootsfaces.net/ui"
-  xmlns:f="http://java.sun.com/jsf/core">
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:c="http://java.sun.com/jstl/core">
 
 <h:head>
   <style>
@@ -26,12 +27,11 @@
   </b:container>
 
   <b:container id="content">
-    <b:messages id="messages" showDetail="false" showSummary="false" />
     <h:form id="form">
       <b:row>
-        <b:column span="7">
+        <b:column span="8">
           <b:panel
-            title="#{board.startOpponentsMove?'Calculating next move...':'Waiting for your move'}"
+            title="#{board.title}"
             id="board" contentStyle="height:600px">
             <ui:repeat id="rows" var="row" value="#{board.rows}"
               varStatus="rowStatus">
@@ -49,17 +49,30 @@
             </ui:repeat>
           </b:panel>
         </b:column>
-        <b:column span="5">
+        <b:column span="4">
           <b:panel title="History" contentStyle="height:250px">
+            <b:panelGrid id="historyGrid" colSpans="4,8" style="width:300px;height:230px;overflow-y: auto;overflow-x:hidden">
+              <c:forEach items="#{board.history}" var="move">
+                <h:outputText value="#{move}" />
+              </c:forEach>
+            </b:panelGrid>
+            <script>
+              debugger;
+              var grid = document.getElementById('form:historyGrid');
+              grid.scrollTop = grid.scrollHeight;
+            </script>
           </b:panel>
-          <b:panel title="Settings #{settings.economyMode?' (restricted to save CPU time)':''}" contentStyle="height:150px">
+          <b:panel
+            title="Settings #{settings.economyMode?' (restricted to save CPU time)':''}"
+            contentStyle="height:150px">
             <b:panelGrid colSpans="6,6">
               <h:outputText value="Look-ahead:" />
               <b:inputText value="#{settings.lookAhead}" />
               <h:outputText value="Calculation breadth:" />
               <b:inputText value="#{settings.movesToConsider}" />
               <h:outputText value="multithreading" />
-              <b:selectBooleanCheckbox value="#{settings.multithreading}" />
+              <b:selectBooleanCheckbox
+                value="#{settings.multithreading}" />
             </b:panelGrid>
           </b:panel>
 
@@ -72,9 +85,6 @@
               <h:outputText value="evaluated moves:" />
               <h:outputText value="#{board.evaluatedMoves}" />
             </b:panelGrid>
-
-
-
           </b:panel>
         </b:column>
       </b:row>
@@ -84,6 +94,7 @@
       <b:commandButton value="flip sides"
         actionListener="#{board.flipSides}" ajax="true" update="@form" />
     </h:form>
-   </b:container>
+    <b:messages id="messages" showDetail="false" showSummary="false" />
+  </b:container>
 </h:body>
 </html>

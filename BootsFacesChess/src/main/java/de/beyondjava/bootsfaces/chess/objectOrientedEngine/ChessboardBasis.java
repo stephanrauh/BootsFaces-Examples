@@ -1,11 +1,11 @@
 package de.beyondjava.bootsfaces.chess.objectOrientedEngine;
 
-import de.beyondjava.bootsfaces.chess.Exceptions.BlackIsCheckMateException;
-import de.beyondjava.bootsfaces.chess.Exceptions.EndOfGameException;
-import de.beyondjava.bootsfaces.chess.Exceptions.WhiteIsCheckMateException;
 import de.beyondjava.bootsfaces.chess.common.ChessConstants;
 import de.beyondjava.bootsfaces.chess.common.Move;
 import de.beyondjava.bootsfaces.chess.common.Piece;
+import de.beyondjava.bootsfaces.chess.exceptions.BlackIsCheckMateException;
+import de.beyondjava.bootsfaces.chess.exceptions.EndOfGameException;
+import de.beyondjava.bootsfaces.chess.exceptions.WhiteIsCheckMateException;
 
 /**
  * Represents the chess board and provide a couple of methods on possible moves.
