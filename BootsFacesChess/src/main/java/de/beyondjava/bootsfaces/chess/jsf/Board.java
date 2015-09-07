@@ -239,6 +239,9 @@ public class Board implements Serializable {
 		String serverName = FacesContext.getCurrentInstance().getExternalContext().getRequestServerName();
 		if ("127.0.0.1".equals(serverName) || "localhost".equals(serverName)) {
 			settings.unlockPowerMode();
+			settings.setMovesToConsider(7);
+			settings.setMultithreading(true);
+			settings.setLookAhead(6);
 		}
 		redraw();
 	}

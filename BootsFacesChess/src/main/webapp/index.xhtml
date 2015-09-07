@@ -17,7 +17,7 @@
   <b:container id="menu">
     <h:form>
       <b:navBar brand="BootsFaces plays chess!" inverse="true"
-        brandHref="#" fixed="top">
+        brandHref="#" fixed="top" onclick="$('.modalPseudoClass').modal();return false;">
         <b:navbarLinks>
           <b:navCommandLink value="New game (white)" iconAwesome="home"
             actionListener="#{board.newGameWhite}" ajax="true"
@@ -27,7 +27,7 @@
           <b:navCommandLink value="Flip sides"
             actionListener="#{board.flipSides}" ajax="true"
             update=":content" />
-          <b:navLink value="About" href="#"></b:navLink>
+          <b:navLink value="About" href="#" onclick="$('.modalPseudoClass').modal();return false;" />
         </b:navbarLinks>
       </b:navBar>
     </h:form>
@@ -100,5 +100,30 @@
     </h:form>
     <b:messages id="messages" showDetail="false" showSummary="false"/>
   </b:container>
+  <b:modal title="About BootsFacesChess" styleClass="modalPseudoClass">
+    <p>Yes, it's buggy. And it plays weak. But that's not the point. It's a rather unlikely demo.</p>
+    <p>This chess game has been written using BootsFaces, the JSF library bringing responsive design
+    to the JSF world. Running on BootsFaces 0.8.0 and above, it uses AJAX a lot.</p>
+    <p>To unlock the full power of the chess engine, you have to run the game on your local server
+    (the URL must contain localhost or 127.0.0.1). Otherwise, the game assumes it's running on a public
+    server and limits its settings to an economy mode. A decent default setting is look-ahead=6, 
+    calculation breadth=7 and multithreading=true. But even so, there a more powerful chess engines out 
+    there.</p>
+    <p>Currently known bugs:</p>
+    <ul>
+    <li>Rendering errors when you try to play black.</li>
+    <li>The game doesn't always recognize when the king can escape from a chess.</li>
+    <li>The computer plays loves to give up its </li>
+    <li>The rule of 50 moves hasn't been implemented.</li>
+    <li>The rule of three identical moves and three identical positions have not been implemented.</li>
+    <li>There's no opening library.</li>
+    <li>Neither did I implement end-game strategies.</li>
+    </ul>
+    
+    <f:facet name="footer">
+        <p>BootsFaces. A great look and feel for JSF. And a lot of fun.</p>
+        <b:button value="close" dismiss="modal" onclick="return false;"/>
+    </f:facet>
+</b:modal>
 </h:body>
 </html>
