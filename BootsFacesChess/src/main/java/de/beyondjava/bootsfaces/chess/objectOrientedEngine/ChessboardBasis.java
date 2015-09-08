@@ -47,6 +47,12 @@ public class ChessboardBasis implements ChessConstants {
 	public int numberOfBlackMoves = 0; // effectively final
 	public boolean stalemate = false;
 	public boolean checkmate = false;
+	public boolean whiteCanCastleLeft = true;
+	public boolean whiteCanCastleRight = true;
+	public boolean whiteHasCastled = false;
+	public boolean blackCanCastleLeft = true;
+	public boolean blackCanCastleRight = true;
+	public boolean blackHasCastled = false;
 
 	private ChessboardBasis(boolean activePlayerIsWhite, int[][] board) {
 		this.activePlayerIsWhite = activePlayerIsWhite;
@@ -72,6 +78,49 @@ public class ChessboardBasis implements ChessConstants {
 	public ChessboardBasis(ChessboardBasis oldBoard, int fromRow, int fromColumn, int toRow, int toColumn,
 			int promotedPiece) {
 		this(!oldBoard.activePlayerIsWhite, getNewBoard(oldBoard, fromRow, fromColumn, toRow, toColumn, promotedPiece));
+		whiteCanCastleLeft = oldBoard.whiteCanCastleLeft;
+		whiteCanCastleRight = oldBoard.whiteCanCastleRight;
+		whiteHasCastled = oldBoard.whiteHasCastled;
+		blackCanCastleLeft = oldBoard.blackCanCastleLeft;
+		blackCanCastleRight = oldBoard.blackCanCastleRight;
+		blackHasCastled = oldBoard.blackHasCastled;
+		int piece = oldBoard.board[fromRow][fromColumn];
+		if ((piece == B_KING && fromRow == 0)) {
+			if (fromColumn == 4 && toColumn == 6) {
+				blackHasCastled = true;
+			}
+			if (fromColumn == 4 && toColumn == 2) {
+				blackHasCastled = true;
+			}
+		}
+		if ((piece == W_KING && fromRow == 7)) {
+			if (fromColumn == 4 && toColumn == 6) {
+				whiteHasCastled = true;
+			}
+			if (fromColumn == 4 && toColumn == 2) {
+				whiteHasCastled = true;
+			}
+		}
+		if (piece==B_KING) {
+			blackCanCastleLeft=false;
+			blackCanCastleRight=false;
+		}
+		if (piece==B_ROOK) {
+			if (fromColumn==0)
+				blackCanCastleLeft=false;
+			if (fromColumn==7)
+				blackCanCastleRight=false;
+		}
+		if (piece==W_KING) {
+			whiteCanCastleLeft=false;
+			whiteCanCastleRight=false;
+		}
+		if (piece==W_ROOK) {
+			if (fromColumn==0)
+				whiteCanCastleLeft=false;
+			if (fromColumn==7)
+				whiteCanCastleRight=false;
+		}
 	}
 
 	private static int[][] getNewBoard(ChessboardBasis oldBoard, int fromRow, int fromColumn, int toRow, int toColumn,
@@ -150,9 +199,9 @@ public class ChessboardBasis implements ChessConstants {
 		// blackTotalValue = blackMaterialValue*10 + blackFieldPositionValue +
 		// blackMoveValue + blackCoverageValue;
 		whiteTotalValue = whiteMaterialValue * 10 + (whitePotentialMaterialValue >> 2) + whiteFieldPositionValue
-				+ whiteMoveValue + whiteCoverageValue;
+				+ whiteMoveValue + whiteCoverageValue + (whiteCanCastleRight ? 500 : 0) +(whiteCanCastleLeft ? 500 : 0) + (whiteHasCastled ? 1200 : 0);
 		blackTotalValue = blackMaterialValue * 10 + (blackPotentialMaterialValue >> 2) + blackFieldPositionValue
-				+ blackMoveValue + blackCoverageValue;
+				+ blackMoveValue + blackCoverageValue + (blackCanCastleRight ? 500 : 0)+ (blackCanCastleLeft ? 500 : 0) + (blackHasCastled ? 1200 : 0);
 		evaluatedPositions++;
 		long dauer = System.nanoTime() - timer;
 		totalTime += dauer;
@@ -284,9 +333,9 @@ public class ChessboardBasis implements ChessConstants {
 	}
 
 	private void evaluateThreats() {
-		int whiteValue = 0;
-		int blackValue = 0;
-		int whiteAdvantage = activePlayerIsWhite ? 1 : -1;
+		// int whiteValue = 0;
+		// int blackValue = 0;
+		// int whiteAdvantage = activePlayerIsWhite ? 1 : -1;
 		for (int row = 0; row < 8; row++)
 			for (int col = 0; col < 8; col++) {
 				whiteCoverageValue += whitePieceReach(row, col);
@@ -323,6 +372,8 @@ public class ChessboardBasis implements ChessConstants {
 	}
 
 	public void findLegalMovesIgnoringCheck() {
+		numberOfBlackMoves=0;
+		numberOfWhiteMoves=0;
 		for (int fromRow = 0; fromRow < 8; fromRow++)
 			for (int fromColumn = 0; fromColumn < 8; fromColumn++) {
 				int piece = getChessPiece(fromRow, fromColumn);
@@ -547,36 +598,30 @@ public class ChessboardBasis implements ChessConstants {
 		if (isEmptyOrCanBeCaptured(nr, nc, pieceIsWhite)) {
 			// To do: recalculate the canBeReachedByBlackPiece is the offending
 			// piece is to be captured by the king
-			if (!canBeReachedByOpponentsPiece(row, column, pieceIsWhite))
+			if (!canBeReachedByOpponentsPiece(nr, nc, pieceIsWhite))
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
-			else if (!canBeReachedByOpponentsPieceAfterCapturing(row, column, nr, nc, pieceIsWhite))
-				addPossibleMove(row, column, nr, nc, pieceIsWhite);
+			
 		}
 		nr = row;
 		nc = column;
 		nr--;
 		if (isEmptyOrCanBeCaptured(nr, nc, pieceIsWhite)) {
-			if (!canBeReachedByOpponentsPiece(row, column, pieceIsWhite))
+			if (!canBeReachedByOpponentsPiece(nr, nc, pieceIsWhite)){
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
-			else if (!canBeReachedByOpponentsPieceAfterCapturing(row, column, nr, nc, pieceIsWhite))
-				addPossibleMove(row, column, nr, nc, pieceIsWhite);
+			}
 		}
 		nr = row;
 		nc = column;
 		nc++;
 		if (isEmptyOrCanBeCaptured(nr, nc, pieceIsWhite)) {
-			if (!canBeReachedByOpponentsPiece(row, column, pieceIsWhite))
-				addPossibleMove(row, column, nr, nc, pieceIsWhite);
-			else if (!canBeReachedByOpponentsPieceAfterCapturing(row, column, nr, nc, pieceIsWhite))
+			if (!canBeReachedByOpponentsPiece(nr, nc, pieceIsWhite))
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
 		}
 		nr = row;
 		nc = column;
 		nc--;
 		if (isEmptyOrCanBeCaptured(nr, nc, pieceIsWhite)) {
-			if (!canBeReachedByOpponentsPiece(row, column, pieceIsWhite))
-				addPossibleMove(row, column, nr, nc, pieceIsWhite);
-			else if (!canBeReachedByOpponentsPieceAfterCapturing(row, column, nr, nc, pieceIsWhite))
+			if (!canBeReachedByOpponentsPiece(nr, nc, pieceIsWhite))
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
 		}
 		nr = row;
@@ -584,7 +629,7 @@ public class ChessboardBasis implements ChessConstants {
 		nr++;
 		nc++;
 		if (isEmptyOrCanBeCaptured(nr, nc, pieceIsWhite)) {
-			if (!canBeReachedByOpponentsPiece(row, column, pieceIsWhite))
+			if (!canBeReachedByOpponentsPiece(nr, nc, pieceIsWhite))
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
 			else if (!canBeReachedByOpponentsPieceAfterCapturing(row, column, nr, nc, pieceIsWhite))
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
@@ -594,9 +639,7 @@ public class ChessboardBasis implements ChessConstants {
 		nr--;
 		nc++;
 		if (isEmptyOrCanBeCaptured(nr, nc, pieceIsWhite)) {
-			if (!canBeReachedByOpponentsPiece(row, column, pieceIsWhite))
-				addPossibleMove(row, column, nr, nc, pieceIsWhite);
-			else if (!canBeReachedByOpponentsPieceAfterCapturing(row, column, nr, nc, pieceIsWhite))
+			if (!canBeReachedByOpponentsPiece(nr, nc, pieceIsWhite))
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
 		}
 		nr = row;
@@ -604,9 +647,7 @@ public class ChessboardBasis implements ChessConstants {
 		nr++;
 		nc--;
 		if (isEmptyOrCanBeCaptured(nr, nc, pieceIsWhite)) {
-			if (!canBeReachedByOpponentsPiece(row, column, pieceIsWhite))
-				addPossibleMove(row, column, nr, nc, pieceIsWhite);
-			else if (!canBeReachedByOpponentsPieceAfterCapturing(row, column, nr, nc, pieceIsWhite))
+			if (!canBeReachedByOpponentsPiece(nr, nc, pieceIsWhite))
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
 		}
 		nr = row;
@@ -614,9 +655,7 @@ public class ChessboardBasis implements ChessConstants {
 		nr--;
 		nc--;
 		if (isEmptyOrCanBeCaptured(nr, nc, pieceIsWhite)) {
-			if (!canBeReachedByOpponentsPiece(row, column, pieceIsWhite))
-				addPossibleMove(row, column, nr, nc, pieceIsWhite);
-			else if (!canBeReachedByOpponentsPieceAfterCapturing(row, column, nr, nc, pieceIsWhite))
+			if (!canBeReachedByOpponentsPiece(nr, nc, pieceIsWhite))
 				addPossibleMove(row, column, nr, nc, pieceIsWhite);
 		}
 		// castling to the right hand side

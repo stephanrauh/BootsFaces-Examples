@@ -163,6 +163,7 @@ public class Board implements Serializable {
 			}
 			if (isPieceSelected) {
 				isPieceSelected = false;
+				//chessboard.findLegalMovesIgnoringCheck(); // debug
 				if (chessboard.isMovePossible(selectedPieceRow, selectedPieceColumn, row, column)) {
 					int piece = chessboard.getChessPiece(selectedPieceRow, selectedPieceColumn);
 					int capturedPiece = chessboard.getChessPiece(row, column);
