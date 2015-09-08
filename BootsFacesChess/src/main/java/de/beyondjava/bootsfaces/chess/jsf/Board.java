@@ -313,6 +313,15 @@ public class Board implements Serializable {
 
 	public void setEndOfGame(boolean endOfGame) {
 		this.endOfGame = endOfGame;
+	}	
+
+	public void ondragstart(int fromRow, int fromColumn) {
+		isPieceSelected=false;
+		onclick(fromRow, fromColumn);
+	}
+
+	public void ondragdrop(int toRow, int toColumn) {
+		onclick(toRow, toColumn);
 	}
 
 }

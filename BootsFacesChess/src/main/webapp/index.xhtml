@@ -57,6 +57,9 @@
                       style="position: absolute; top: 0px; left: 0px;width: 68px; height: 68px;#{board.getOpacity(rowStatus.index,columnStatus.index)}"
                       onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
                       oncomplete="document.getElementById('form:opponent').click()"
+                      ondragstart="console.log('drag start'+#{rowStatus.index}+'/'+#{columnStatus.index});fromRow=#{rowStatus.index};fromColumn=#{columnStatus.index};ajax:board.ondragstart(rowStatus.index,columnStatus.index)"
+                      ondragover="console.log('drag over');if ((fromRow!=#{rowStatus.index}) || (fromColumn!=#{columnStatus.index})) event.preventDefault();"
+                      ondrop="console.log('drop'+ fromRow + '//' + fromColumn + ' --> '+#{rowStatus.index}+'/'+#{columnStatus.index});ajax:board.ondragdrop(rowStatus.index,columnStatus.index)"
                       update="@form :messages" />
                   </div>
 
