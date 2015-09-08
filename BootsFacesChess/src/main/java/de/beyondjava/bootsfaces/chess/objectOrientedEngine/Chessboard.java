@@ -1,6 +1,5 @@
 package de.beyondjava.bootsfaces.chess.objectOrientedEngine;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,9 +47,9 @@ public class Chessboard extends ChessboardBasis {
 		int[] bestMoves = activePlayerIsWhite ? findBestWhiteMoves(settings.getLookAhead(), settings.getMovesToConsider(), settings.isMultithreading()) 
 				: findBestBlackMoves(settings.getLookAhead(), settings.getMovesToConsider(), settings.isMultithreading());
         Chessboard.realTimeOfCalculation = System.nanoTime() - start;
-        System.out.println("Calculation took " + ((Chessboard.realTimeOfCalculation / 1000) / 1000.0d) + "ms Evalutated POSITIONAL_VALUES:" + NumberFormat.getInstance().format( Chessboard.evaluatedPositions));
-        System.out.println("evaluation took  " + ((Chessboard.totalTime/1000)/1000) + " ms");
-        System.out.println("Average evaluation: " + Chessboard.totalTime/evaluatedPositions + " ns") ;
+//        System.out.println("Calculation took " + ((Chessboard.realTimeOfCalculation / 1000) / 1000.0d) + "ms Evalutated POSITIONAL_VALUES:" + NumberFormat.getInstance().format( Chessboard.evaluatedPositions));
+//        System.out.println("evaluation took  " + ((Chessboard.totalTime/1000)/1000) + " ms");
+//        System.out.println("Average evaluation: " + Chessboard.totalTime/evaluatedPositions + " ns") ;
         int move = bestMoves[0];
         int fromRow = (move >> 12) & 0x000F;
         int fromColumn = (move >> 8) & 0x000F;
@@ -93,9 +92,9 @@ public class Chessboard extends ChessboardBasis {
                 }
             }
             int size = bestEvaluatedMoves.size();
-            if (size == 0) {
-                System.err.println("No possible move left?");
-            }
+//            if (size == 0) {
+//                System.err.println("No possible move left?");
+//            }
             int[] bestMoves = new int[size];
             for (int i = 0; i < movesToConsider && i < size; i++) {
                 bestMoves[i] = bestEvaluatedMoves.get(i).move;
@@ -253,10 +252,10 @@ public class Chessboard extends ChessboardBasis {
                 }
             }
             int size = bestEvaluatedMoves.size();
-            if (0 == size)
-            {
-                System.err.println("No possible move left?");
-            }
+//            if (0 == size)
+//            {
+//                System.err.println("No possible move left?");
+//            }
 
             int[] bestMoves = new int[size];
             for (int i = 0; i < movesToConsider && i < size; i++) {
@@ -413,7 +412,7 @@ public class Chessboard extends ChessboardBasis {
         List<XMove> evaluatedMoves = new ArrayList<>(moves.length);
         for (int i = 0; i < moves.length; i++) {
             int move = moves[i];
-            int capturedValue = (move >> 24);
+//            int capturedValue = (move >> 24);
             int promotion = (move >> 16) & 0x00FF;
             int fromRow = (move >> 12) & 0x000F;
             int fromColumn = (move >> 8) & 0x000F;

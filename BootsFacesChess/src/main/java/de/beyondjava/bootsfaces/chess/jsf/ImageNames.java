@@ -29,6 +29,23 @@ public class ImageNames {
                                     "w_s_koenig.png",
                                     "w_w_koenig.png"
     };
+	
+	public static final String[] chessPiecesFileNameCropped = {
+            "feld_frei.png", 
+            "s_bauer_frei.png",
+            "w_bauer_frei.png",
+            "s_turm_frei.png",
+            "w_turm_frei.png",
+            "s_springer_frei.png",
+            "w_springer_frei.png",
+            "s_laeufer_frei.png",
+            "w_laeufer_frei.png",
+            "s_dame_frei.png",
+            "w_dame_frei.png",
+            "s_koenig_frei.png",
+            "w_koenig_frei.png",
+};
+
 
 	public static final int s_empty = 0;
 	public static final int w_empty = 1;

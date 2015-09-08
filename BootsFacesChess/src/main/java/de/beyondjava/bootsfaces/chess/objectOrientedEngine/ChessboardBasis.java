@@ -121,6 +121,8 @@ public class ChessboardBasis implements ChessConstants {
 			if (fromColumn==7)
 				whiteCanCastleRight=false;
 		}
+		whiteTotalValue += (whiteCanCastleRight ? 400 : 0) +(whiteCanCastleLeft ? 400 : 0) + (whiteHasCastled ? 1000 : 0);
+		blackTotalValue += (blackCanCastleRight ? 400 : 0)+ (blackCanCastleLeft ? 400 : 0) + (blackHasCastled ? 1000 : 0);
 	}
 
 	private static int[][] getNewBoard(ChessboardBasis oldBoard, int fromRow, int fromColumn, int toRow, int toColumn,
@@ -188,20 +190,18 @@ public class ChessboardBasis implements ChessConstants {
 		return board;
 	}
 
-	private void evaluateBoard() {
+	public void evaluateBoard() {
 		long timer = System.nanoTime();
 		evaluateMaterialValue();
 		evaluateFieldPositionalValue();
 		findLegalMovesIgnoringCheck();
 		evaluateThreats();
-		// whiteTotalValue = whiteMaterialValue*10 + whiteFieldPositionValue +
-		// whiteMoveValue + whiteCoverageValue;
-		// blackTotalValue = blackMaterialValue*10 + blackFieldPositionValue +
-		// blackMoveValue + blackCoverageValue;
 		whiteTotalValue = whiteMaterialValue * 10 + (whitePotentialMaterialValue >> 2) + whiteFieldPositionValue
-				+ whiteMoveValue + whiteCoverageValue + (whiteCanCastleRight ? 500 : 0) +(whiteCanCastleLeft ? 500 : 0) + (whiteHasCastled ? 1200 : 0);
+				+ whiteMoveValue + whiteCoverageValue;
+		// The evaluation of castling has been moved to the constructor of ChessboardBasis!
 		blackTotalValue = blackMaterialValue * 10 + (blackPotentialMaterialValue >> 2) + blackFieldPositionValue
-				+ blackMoveValue + blackCoverageValue + (blackCanCastleRight ? 500 : 0)+ (blackCanCastleLeft ? 500 : 0) + (blackHasCastled ? 1200 : 0);
+				+ blackMoveValue;
+		// The evaluation of castling has been moved to the constructor of ChessboardBasis!
 		evaluatedPositions++;
 		long dauer = System.nanoTime() - timer;
 		totalTime += dauer;

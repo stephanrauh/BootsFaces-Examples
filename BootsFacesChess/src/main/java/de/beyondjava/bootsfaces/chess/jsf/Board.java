@@ -50,9 +50,9 @@ public class Board implements Serializable {
 	private int selectedPieceRow;
 
 	private boolean endOfGame = false;
-	
-	private boolean blackIsTop=true;
-	
+
+	private boolean blackIsTop = true;
+
 	private EndOfGameException gameOverException;
 
 	@ManagedProperty("#{settings}")
@@ -64,24 +64,31 @@ public class Board implements Serializable {
 	}
 
 	public void flipSides(ActionEvent event) {
-		blackIsTop=!blackIsTop;
+		blackIsTop = !blackIsTop;
 		startOpponentsMove = true;
 		opponentsMove(event);
+	}
+
+	public String getBackgroundImage(int row, int column) {
+		if ((row + column) % 2 == 0)
+			return "wikimediaimages/s_feld.png";
+		else
+			return "wikimediaimages/w_feld.png";
 	}
 
 	public void newGameWhite(ActionEvent event) {
 		chessboard = new Chessboard();
 		history.clear();
-		endOfGame=false;
-		isPieceSelected=false;
-		blackIsTop=true;
+		endOfGame = false;
+		isPieceSelected = false;
+		blackIsTop = true;
 		redraw();
 	}
 
 	public void newGameBlack(ActionEvent event) {
 		newGameWhite(null);
-		blackIsTop=false;
-		startOpponentsMove=true;
+		blackIsTop = false;
+		startOpponentsMove = true;
 		opponentsMove(event);
 	}
 
@@ -106,23 +113,41 @@ public class Board implements Serializable {
 	}
 
 	public String getInfo() {
+		chessboard.evaluateBoard();
+		info = "W:" + String.valueOf(chessboard.whiteTotalValue) + " B: " + String.valueOf(chessboard.blackTotalValue);
 		return info;
 	}
 
-	public String getOpacityAndBorder(int row, int column) {
+	public String getBorder(int row, int column) {
 		if (!blackIsTop) {
-			row=7-row;
-			column=7-column;
+			row = 7 - row;
+			column = 7 - column;
 		}
 		if (startOpponentsMove)
-			return "opacity:0.7;border:1px solid black";
+			return "border:1px solid black";
 		if (!isPieceSelected)
-			return "opacity:1.0;border:1px solid black";
+			return "border:1px solid black";
 		if (selectedPieceColumn == column && selectedPieceRow == row)
-			return "opacity:1.0;border: 2px solid blue;";
+			return "border: 2px solid blue;";
 		if (chessboard.isMovePossible(selectedPieceRow, selectedPieceColumn, row, column))
-			return "opacity:1.0;border: 2px solid red;";
-		return "opacity:1.0;border: 1px solid black";
+			return "border: 2px solid red;";
+		return "border: 1px solid black";
+	}
+
+	public String getOpacity(int row, int column) {
+		if (!blackIsTop) {
+			row = 7 - row;
+			column = 7 - column;
+		}
+		if (startOpponentsMove)
+			return "opacity:0.7";
+		if (!isPieceSelected)
+			return "opacity:1.0";
+		if (selectedPieceColumn == column && selectedPieceRow == row)
+			return "opacity:1.0";
+		if (chessboard.isMovePossible(selectedPieceRow, selectedPieceColumn, row, column))
+			return "opacity:1.0";
+		return "opacity:1.0";
 	}
 
 	public List<Row> getRows() {
@@ -158,12 +183,12 @@ public class Board implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, fm);
 		} else {
 			if (!blackIsTop) {
-				row=7-row;
-				column=7-column;
+				row = 7 - row;
+				column = 7 - column;
 			}
 			if (isPieceSelected) {
 				isPieceSelected = false;
-				//chessboard.findLegalMovesIgnoringCheck(); // debug
+				// chessboard.findLegalMovesIgnoringCheck(); // debug
 				if (chessboard.isMovePossible(selectedPieceRow, selectedPieceColumn, row, column)) {
 					int piece = chessboard.getChessPiece(selectedPieceRow, selectedPieceColumn);
 					int capturedPiece = chessboard.getChessPiece(row, column);
@@ -176,8 +201,8 @@ public class Board implements Serializable {
 							capturedPiece > ChessConstants.W_EMPTY, capturedPiece);
 					info = m.toString();
 					String move = m.getNotation();
-					if (history.size()%2==0) {
-						move = String.valueOf((history.size()/2)+1) + ". " + move;
+					if (history.size() % 2 == 0) {
+						move = String.valueOf((history.size() / 2) + 1) + ". " + move;
 					}
 					history.add(move);
 					selectedPieceRow = 0;
@@ -211,8 +236,8 @@ public class Board implements Serializable {
 				try {
 					Move m = chessboard.findBestMove();
 					String move = m.getNotation();
-					if (history.size()%2==0) {
-						move = String.valueOf((history.size()/2)+1) + ". " + move;
+					if (history.size() % 2 == 0) {
+						move = String.valueOf((history.size() / 2) + 1) + ". " + move;
 					}
 					history.add(move);
 					info = move.toString();
@@ -222,7 +247,7 @@ public class Board implements Serializable {
 					FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "The game is already over.");
 					FacesContext.getCurrentInstance().addMessage(null, fm);
 					endOfGame = true;
-					gameOverException=e;
+					gameOverException = e;
 					info = e.getClass().getSimpleName();
 				}
 				elapsedTime = ((Chessboard.realTimeOfCalculation / 1000) / 1000.0d) + "ms";
@@ -254,12 +279,11 @@ public class Board implements Serializable {
 			for (int i = 0; i < 8; i++) {
 				getRows().add(new Row(i, pieces[i], false));
 			}
-		}
-		else {
-			for (int i = 7; i >=0; i--) {
+		} else {
+			for (int i = 7; i >= 0; i--) {
 				getRows().add(new Row(i, pieces[i], true));
 			}
-			
+
 		}
 	}
 

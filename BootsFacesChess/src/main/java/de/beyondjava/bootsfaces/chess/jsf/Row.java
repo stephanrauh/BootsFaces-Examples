@@ -15,7 +15,7 @@ public class Row implements Serializable {
 				int piece = pieces[col];
 				if (piece < 0)
 					piece = 0; // treat en-passant-fields as empty fields
-				fileNames.add("wikimediaimages/" + ImageNames.chessPiecesFileName[piece + background]);
+				fileNames.add("wikimediaimages/" + ImageNames.chessPiecesFileNameCropped[piece/2]);
 				background = 1 - background;
 			}
 
@@ -24,7 +24,7 @@ public class Row implements Serializable {
 				int piece = pieces[col];
 				if (piece < 0)
 					piece = 0; // treat en-passant-fields as empty fields
-				fileNames.add("wikimediaimages/" + ImageNames.chessPiecesFileName[piece + background]);
+				fileNames.add("wikimediaimages/" + ImageNames.chessPiecesFileNameCropped[piece/2]);
 				background = 1 - background;
 			}
 		}

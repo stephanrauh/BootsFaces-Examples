@@ -17,17 +17,20 @@
   <b:container id="menu">
     <h:form>
       <b:navBar brand="BootsFaces plays chess!" inverse="true"
-        brandHref="#" fixed="top" onclick="$('.modalPseudoClass').modal();return false;">
+        brandHref="#" fixed="top"
+        onclick="$('.modalPseudoClass').modal();return false;">
         <b:navbarLinks>
           <b:navCommandLink value="New game (white)" iconAwesome="home"
             actionListener="#{board.newGameWhite}" ajax="true"
             update=":content" />
-          <b:navCommandLink value="New game (black)" icon="cross" actionListener="#{board.newGameBlack}" ajax="true"
+          <b:navCommandLink value="New game (black)" icon="cross"
+            actionListener="#{board.newGameBlack}" ajax="true"
             update=":content" />
           <b:navCommandLink value="Flip sides"
             actionListener="#{board.flipSides}" ajax="true"
             update=":content" />
-          <b:navLink value="About" href="#" onclick="$('.modalPseudoClass').modal();return false;" />
+          <b:navLink value="About" href="#"
+            onclick="$('.modalPseudoClass').modal();return false;" />
         </b:navbarLinks>
       </b:navBar>
     </h:form>
@@ -41,23 +44,44 @@
             contentStyle="height:580px">
             <ui:repeat id="rows" var="row" value="#{board.rows}"
               varStatus="rowStatus">
-              <div style="width: 560px; height: 68px; overflow: auto;">
+              <div style="width: 630px; height: 68px; overflow: hidden;">
                 <ui:repeat id="fields" var="image" value="#{row.images}"
                   varStatus="columnStatus">
-                  <b:image value="#{image}"
-                    style="width:68px;height:68px;;display:inline-block;#{board.getOpacityAndBorder(rowStatus.index,columnStatus.index)}"
-                    onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
-                    oncomplete="document.getElementById('form:opponent').click()"
-                    update="@form :messages" />
+
+                  <div
+                    style="position: relative; left: 0; top: 0; width: 68px; height: 68px; margin-right:-4px; display: inline-block">
+                    <img src="#{board.getBackgroundImage(rowStatus.index,columnStatus.index)}"
+                      style="position: relative; top: 0; left: 0; width: 68px; height: 68px;#{board.getBorder(rowStatus.index,columnStatus.index)}" />
+
+                    <b:image value="#{image}"
+                      style="position: absolute; top: 0px; left: 0px;width: 68px; height: 68px;#{board.getOpacity(rowStatus.index,columnStatus.index)}"
+                      onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
+                      oncomplete="document.getElementById('form:opponent').click()"
+                      update="@form :messages" />
+                  </div>
+
+
+                  <ui:remove>
+                    <b:image value="#{image}"
+                      style="width:68px;height:68px;display:inline-block;#{board.getOpacityAndBorder(rowStatus.index,columnStatus.index)}"
+                      onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
+                      oncomplete="document.getElementById('form:opponent').click()"
+                      update="@form :messages" />
+                  </ui:remove>
                 </ui:repeat>
+                <ui:remove>
+                <b:image value="wikimediaimages/s_s_turm_frei.png"
+                  style="width:68px;height:68px;" />
+                  </ui:remove>
               </div>
             </ui:repeat>
           </b:panel>
         </b:column>
         <b:column span="4">
-          <b:panel title="History" contentStyle="height:240px" look="info">
+          <b:panel title="History" contentStyle="height:220px"
+            look="info">
             <b:panelGrid id="historyGrid" colSpans="5,7"
-              style="width:300px;height:220px;overflow-y: auto;overflow-x:hidden">
+              style="width:300px;height:200px;overflow-y: auto;overflow-x:hidden">
               <c:forEach items="#{board.history}" var="move">
                 <h:outputText value="#{move}" />
               </c:forEach>
@@ -82,7 +106,8 @@
             </b:panelGrid>
           </b:panel>
 
-          <b:panel title="statistics" contentStyle="height:80px" look="info">
+          <b:panel title="statistics" contentStyle="height:100px"
+            look="info">
             <b:panelGrid colSpans="6,6">
               <h:outputText value="Elapsed time:" />
               <h:outputText value="#{board.elapsedTime}" />
@@ -90,7 +115,9 @@
               <h:outputText value="#{board.cpuTime}" />
               <h:outputText value="evaluated moves:" />
               <h:outputText value="#{board.evaluatedMoves}" />
-            </b:panelGrid>
+              <h:outputText value="Evaluation:" />
+              <h:outputText value="#{board.info}" />
+             </b:panelGrid>
           </b:panel>
         </b:column>
       </b:row>
@@ -98,31 +125,37 @@
         actionListener="#{board.opponentsMove}" ajax="true"
         update="@form" style="display:none" />
     </h:form>
-    <b:messages id="messages" showDetail="false" showSummary="false"/>
+    <b:messages id="messages" showDetail="false" showSummary="false" />
   </b:container>
   <b:modal title="About BootsFacesChess" styleClass="modalPseudoClass">
-    <p>Yes, it's buggy. And it plays weak. But that's not the point. It's a rather unlikely demo.</p>
-    <p>This chess game has been written using BootsFaces, the JSF library bringing responsive design
-    to the JSF world. Running on BootsFaces 0.8.0 and above, it uses AJAX a lot.</p>
-    <p>To unlock the full power of the chess engine, you have to run the game on your local server
-    (the URL must contain localhost or 127.0.0.1). Otherwise, the game assumes it's running on a public
-    server and limits its settings to an economy mode. A decent default setting is look-ahead=6, 
-    calculation breadth=7 and multithreading=true. But even so, there a more powerful chess engines out 
-    there.</p>
+    <p>Yes, it's buggy. And it plays weak. But that's not the point.
+      It's a rather unlikely demo.</p>
+    <p>This chess game has been written using BootsFaces, the JSF
+      library bringing responsive design to the JSF world. Running on
+      BootsFaces 0.8.0 and above, it uses AJAX a lot.</p>
+    <p>To unlock the full power of the chess engine, you have to run
+      the game on your local server (the URL must contain localhost or
+      127.0.0.1). Otherwise, the game assumes it's running on a public
+      server and limits its settings to an economy mode. A decent
+      default setting is look-ahead=6, calculation breadth=7 and
+      multithreading=true. But even so, there a more powerful chess
+      engines out there.</p>
     <p>Currently known bugs:</p>
     <ul>
-    <li>Rendering errors when you try to play black.</li>
-    <li>You can escape from check by castling.</li>
-    <li>The rule of 50 moves hasn't been implemented.</li>
-    <li>The rule of three identical moves and three identical positions have not been implemented.</li>
-    <li>There's no opening library.</li>
-    <li>Neither did I implement end-game strategies.</li>
+      <li>Rendering errors when you try to play black.</li>
+      <li>You can escape from check by castling.</li>
+      <li>The rule of 50 moves hasn't been implemented.</li>
+      <li>The rule of three identical moves and three identical
+        positions have not been implemented.</li>
+      <li>There's no opening library.</li>
+      <li>Neither did I implement end-game strategies.</li>
     </ul>
-    
+
     <f:facet name="footer">
-        <p>BootsFaces. A great look and feel for JSF. And a lot of fun.</p>
-        <b:button value="close" dismiss="modal" onclick="return false;"/>
+      <p>BootsFaces. A great look and feel for JSF. And a lot of
+        fun.</p>
+      <b:button value="close" dismiss="modal" onclick="return false;" />
     </f:facet>
-</b:modal>
+  </b:modal>
 </h:body>
 </html>
