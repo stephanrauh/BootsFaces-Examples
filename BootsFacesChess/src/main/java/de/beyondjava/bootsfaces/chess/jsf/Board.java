@@ -149,6 +149,31 @@ public class Board implements Serializable {
 			return "opacity:1.0";
 		return "opacity:1.0";
 	}
+	
+	public String getLegalTargets() {
+		String targets="";
+		for (int row = 0; row<8; row++)
+			for (int column=0; column<8;column++)
+				if (isLegalTarget(row, column))
+					targets+="("+row+","+column+")";
+		return targets;
+	}
+	
+	public boolean isLegalTarget(int row, int column) {
+		if (!blackIsTop) {
+			row = 7 - row;
+			column = 7 - column;
+		}
+		if (startOpponentsMove)
+			return false;
+		if (!isPieceSelected)
+			return false;
+		if (selectedPieceColumn == column && selectedPieceRow == row)
+			return false;
+		if (chessboard.isMovePossible(selectedPieceRow, selectedPieceColumn, row, column))
+			return true;
+		return false;
+	}
 
 	public List<Row> getRows() {
 		return rows;
