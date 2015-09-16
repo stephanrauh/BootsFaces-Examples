@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:bnu="http://bootsfaces.net/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>PrimeFaces layout component and BootsFaces panels</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="north" size="100" resizable="false" closable="false" collapsible="false" >
+                <h3>PrimeFaces layout component and BootsFaces panels (and PrimeFaces AJAX)</h3>
+
+            </p:layoutUnit>
+
+
+            <p:layoutUnit position="west" size="195" header="Panel" resizable="true" closable="false" collapsible="true" >
+                <h:form id="form" >
+
+                    <p:menu>
+                        <p:menuitem id="abc" value="Welcome page" action="#{sobean.page0()}" update=":content:pcenter" />
+                        <p:submenu label="ABC" >
+                            <p:menuitem id="X1" value="Name" action="#{sobean.page1()}" update=":content:pcenter"/>
+                            <p:menuitem id="X2" value="Street" action="#{sobean.page2()}" update=":content:pcenter"/>
+                            <p:menuitem id="X3" value="City" action="#{sobean.page3()}" update=":content:pcenter"/>
+                        </p:submenu>
+                    </p:menu>
+
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" header="Welcome user" >
+                <h:form id="content">
+                    <p:panel id="pcenter">  
+                      <ui:include src="#{sobean.page}.xhtml" />
+                    </p:panel>
+                 </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="false">
+                <h:outputText value="South unit content." />
+            </p:layoutUnit>
+
+        </p:layout>         
+    </h:body>
+</html>

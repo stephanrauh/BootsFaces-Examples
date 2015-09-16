@@ -1,0 +1,9 @@
+/target/
+rebel.xml
+.metadata
+.settings
+dist
+.faces-config.xml.jsfdia
+.project
+.classpath
+.DS_Store
