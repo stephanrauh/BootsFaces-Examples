@@ -1,0 +1,37 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:b="http://bootsfaces.net/ui"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+
+
+  <h:form id="navigation_form">
+    <b:row>
+      <b:column col-sm="6">
+        <b:panelGrid colSpans="12">
+          <b:commandButton value="Navigate (AJAX - action)"
+            ajax="true" onclick="ajax:AJAXBean.onClick()"
+            action="#{AJAXBean.navigationAction}"
+            update="@form:**:messages" />
+          <b:commandButton value="Navigate (AJAX - onclick)"
+            ajax="true" onclick="ajax:AJAXBean.onClickNavigate()"
+            
+            update="@form:**:messages" />
+          <b:commandButton value="Navigate (Non-AJAX)"
+            action="#{AJAXBean.navigationAction}" />
+        </b:panelGrid>
+      </b:column>
+      <b:column col-sm="6">
+        <b:well id="messages">
+	      Last action:
+	      <ul>
+            <ui:repeat var="message" value="#{AJAXBean.messages}">
+              <li>#{message}</li>
+            </ui:repeat>
+          </ul>
+        </b:well>
+      </b:column>
+    </b:row>
+  </h:form>
+</ui:fragment>

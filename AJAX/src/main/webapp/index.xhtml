@@ -26,11 +26,16 @@
 
 		<b:container id="content">
 			<b:tabView id="tabViewID">
-				<b:tab title="command button"
+				<b:tab title="Navigation"
 					onclick="ajax:AJAXBean.clearMessages()" update="**:*messages">
 					<div style="height: 10px" />
-					<ui:include src="commandbutton.xhtml" />
+					<ui:include src="commandbutton3.xhtml" />
 				</b:tab>
+                <b:tab title="command button"
+                  onclick="ajax:AJAXBean.clearMessages()" update="**:*messages">
+                  <div style="height: 10px" />
+                  <ui:include src="commandbutton.xhtml" />
+                </b:tab>
 				<b:tab title="command button 2" update="**:*messages"
 					onclick="ajax:AJAXBean.clearMessages()">
 					<div style="height: 10px" />

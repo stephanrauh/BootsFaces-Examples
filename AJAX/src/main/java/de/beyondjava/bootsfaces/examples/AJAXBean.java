@@ -123,7 +123,7 @@ public class AJAXBean {
 	public String onBlur() {
 		String event = " blur";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	private void report(String event) {
@@ -141,85 +141,91 @@ public class AJAXBean {
 	public String onChange() {
 		String event = " change";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onValueChange() {
 		String event = " valueChange";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onClick() {
 		String event = " click";
 		report(event);
-		return "Hallo";
+		return null;
+	}
+
+	public String onClickNavigate() {
+		String event = " click";
+		report(event);
+		return "landingPage.xhtml";
 	}
 
 	public String onDblClick() {
 		String event = " dblclick";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onFocus() {
 		String event = " focus";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onKeyDown() {
 		String event = " keydown";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onKeyPress() {
 		String event = " keypress";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onKeyUp() {
 		String event = " keyup";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onMouseDown() {
 		String event = " mousedown";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onMouseMove() {
 		String event = " mousemove";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onMouseOut() {
 		String event = " mouseout";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onMouseOver() {
 		String event = " mouseover";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onMouseUp() {
 		String event = " mouseup";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public String onSelect() {
 		String event = " select";
 		report(event);
-		return "Hallo";
+		return null;
 	}
 
 	public boolean isBool() {
@@ -240,7 +246,11 @@ public class AJAXBean {
 
 	public String standardJSFAction() {
 		report("Standard JSF action called");
-		return null; // "landingPage.jsf";
+		return null; 
+	}
+	public String navigationAction() {
+		report("Navigation action called");
+		return "landingPage.jsf";
 	}
 	
 	public void facetListener(javax.faces.event.AjaxBehaviorEvent event) throws javax.faces.event.AbortProcessingException {
