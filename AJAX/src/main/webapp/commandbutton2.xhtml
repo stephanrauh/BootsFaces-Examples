@@ -7,7 +7,12 @@
 	<h:form>
 		<b:row>
 			<b:column col-sm="6">
-				<b:panel look="primary" title="AJAXified b:commandButton with f:ajax">
+				<b:panel look="primary" title="AJAXified b:commandButton with f:ajax"  update="**:messages" ajax="true"
+        onexpand="console.log('expand - start');ajax:AJAXBean.onPanelExpandStart()" 
+        onexpanded="console.log('expand - done');ajax:AJAXBean.onPanelExpanded()" 
+        oncollapse="console.log('collapse - start');ajax:AJAXBean.onPanelCollapseStart()" 
+        oncollapsed="console.log('collapse - done');ajax:AJAXBean.onPanelCollapsed()" 
+        >
 
 					<h:commandButton value="Change image" action="#{imageGallery.chooseAnotherImage()}">
 						<f:ajax listener="#{AJAXBean.facetListener}" render="@form"></f:ajax>

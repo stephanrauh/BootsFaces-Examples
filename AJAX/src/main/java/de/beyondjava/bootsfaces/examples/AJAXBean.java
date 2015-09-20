@@ -135,6 +135,7 @@ public class AJAXBean {
 			messages.add(0, now() + event);
 		}
 		lastMessage = event;
+		System.out.println(event);
 
 	}
 
@@ -221,6 +222,31 @@ public class AJAXBean {
 		report(event);
 		return null;
 	}
+	
+	public String onPanelCollapseStart() {
+		String event = " panel starts to collapse";
+		report(event);
+		return null;
+	}
+	
+	public String onPanelCollapsed() {
+		String event = " panel finished collapsing";
+		report(event);
+		return null;
+	}
+
+	public String onPanelExpandStart() {
+		String event = " panel starts to expand";
+		report(event);
+		return null;
+	}
+	
+	public String onPanelExpanded() {
+		String event = " panel finished expanding";
+		report(event);
+		return null;
+	}
+
 
 	public String onSelect() {
 		String event = " select";

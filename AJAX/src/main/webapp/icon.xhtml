@@ -22,15 +22,16 @@
 						onmouseup="console.log('mouse up');ajax:AJAXBean.onMouseUp();"
 						onmouseselect="console.log('mouse select');ajax:AJAXBean.onMouseSelect();"
 						update="messages" />
-						<b:selectBooleanCheckbox value="#{AJAXBean.spinning}" 
+                    <br />
+					<b:selectBooleanCheckbox value="#{AJAXBean.spinning}" 
 						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
-						update="messages @form:**:*icon" label="spinning" />
-						<b:selectBooleanCheckbox value="#{AJAXBean.disabled}" 
+						update="messages @form:**:*icon" caption="spinning" />
+					<b:selectBooleanCheckbox value="#{AJAXBean.disabled}" 
 						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
-						update="messages @form:**:*icon" label="disabled" />
-						<b:selectBooleanCheckbox value="#{AJAXBean.readOnly}" 
+						update="messages @form:**:*icon" caption="disabled (gray the icon and disabled AJAX)" />
+					<b:selectBooleanCheckbox value="#{AJAXBean.readOnly}" 
 						onchange="console.log('before onChange');ajax:AJAXBean.onChange();javascript:console.log('afterOnChange')"
-						update="messages @form:**:*icon" label="readOnly (not clickable, but not grayed out, either)" />
+						update="messages @form:**:*icon" caption="readOnly (disabled AJAX, but doesn't gray out the icon)" />
 				</b:panel>
 				<b:panel look="primary" title="AJAXified FontAwesome icon (b:icon)">
 					<b:iconAwesome name="futbol-o" size="3x" spin="#{AJAXBean.spinning}" disabled="#{AJAXBean.disabled}" readonly="#{AJAXBean.readOnly}" id="fontAwesomeicon"
