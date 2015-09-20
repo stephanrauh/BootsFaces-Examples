@@ -1,0 +1,50 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:b="http://bootsfaces.net/ui"
+  xmlns:f="http://java.sun.com/jsf/core">
+
+  <h:form>
+    <b:row>
+      <b:column col-sm="6">
+        <b:panel look="primary" title="AJAXified b:carousel"
+          update="@form:messages"
+          onexpand="console.log('expand - start');ajax:AJAXBean.onPanelExpandStart()"
+          onexpanded="console.log('expand - done');ajax:AJAXBean.onPanelExpanded()"
+          oncollapse="console.log('expand - start');ajax:AJAXBean.onPanelCollapseStart()"
+          oncollapsed="console.log('expand - done');ajax:AJAXBean.onPanelCollapsed()">
+          <b:carousel id="parque" style="width:400px" 
+                      onslidestart="console.log('slide start');ajax:AJAXBean.onCarouselSlideStart()" 
+                      onslid="console.log('finished sliding');ajax:AJAXBean.onCarouselSlid()"
+                      onmouseout="console.log('mouse out');ajax:AJAXBean.onMouseOut();"
+                      onmouseover="console.log('mouse out');ajax:AJAXBean.onMouseOver();"
+                      startAnimation="false"
+                      update=":**:*messages">
+            <b:carouselItem onmousover="console.log('mouse over');ajax:AJAXBean.onMouseOverCarouselItem(1);">
+              <img src="Valladolid-parque-1.jpg"
+                alt="Valladolid" />
+            </b:carouselItem>
+            <b:carouselItem>
+              <img src="Valladolid-parque-2.jpg"
+                alt="Valladolid" />
+            </b:carouselItem>
+            <b:carouselItem>
+              <img src="Valladolid-parque-3.jpg"
+                alt="Valladolid" />
+            </b:carouselItem>
+          </b:carousel>
+        </b:panel>
+      </b:column>
+      <b:column col-sm="6">
+        <b:well id="messages">
+	                Last action:
+	                <ul>
+            <ui:repeat var="message" value="#{AJAXBean.messages}">
+              <li>#{message}</li>
+            </ui:repeat>
+          </ul>
+        </b:well>
+      </b:column>
+    </b:row>
+  </h:form>
+</ui:fragment>

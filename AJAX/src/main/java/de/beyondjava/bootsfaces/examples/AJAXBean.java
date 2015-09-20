@@ -211,11 +211,17 @@ public class AJAXBean {
 		return null;
 	}
 
-	public String onMouseOver() {
+	public void onMouseOver() {
 		String event = " mouseover";
+		report(event);
+	}
+	
+	public String onMouseOverCarouselItem(Object index) {
+		String event = " mouseover Carousel Item #" + index;
 		report(event);
 		return null;
 	}
+
 
 	public String onMouseUp() {
 		String event = " mouseup";
@@ -243,6 +249,17 @@ public class AJAXBean {
 	
 	public String onPanelExpanded() {
 		String event = " panel finished expanding";
+		report(event);
+		return null;
+	}
+
+	public String onCarouselSlideStart() {
+		String event = " carousel started to slide";
+		report(event);
+		return null;
+	}
+	public String onCarouselSlid() {
+		String event = " carousel finished sliding";
 		report(event);
 		return null;
 	}
