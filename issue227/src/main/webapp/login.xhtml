@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui" style=" height: 100%">
+    <h:head>
+        <title>ListGenerator</title>
+        <h:outputStylesheet library="css" name="css1.css" />
+    </h:head>
+            <f:metadata>
+                <f:event listener="#{IdentificationController.init()}" type="preRenderView" />
+            </f:metadata>
+    <h:body style="background-color:#EEE;" >
+        <h:form id="form" style="width:100%; background-color:#EEE;" rendered="#{IdentificationController.session}">
+            <p:idleMonitor timeout="3600000" onidle="PF('idleDialog').show()" />
+                <p:confirmDialog id="confirmDialog"
+                            message="La session a été clôturée. Vous devez recharger la page en sélectionnant l'url et appuyez sur enter"
+                            header="Session clôturée" severity="alert" widgetVar="idleDialog">
+                </p:confirmDialog>
+            <p:growl life="10000" id="growl"/>
+            <p:focus />
+            <p:panelGrid style="margin: 0 auto; font-size:95%; background-color:#EEE;">
+                    <!-- LOGIN -->
+                    <p:row>
+                        <p:column style="background-color: #EEE !important;" >
+                            <h2>Authentification</h2>
+                        </p:column>
+                    </p:row>
+                    <!-- Login -->
+                    <p:row>
+                        <p:column style=" background-color: #EEE !important;" >
+                            <b:inputText id="TxtLogin"
+                                       value="#{IdentificationController.login}"
+                                       required="true" >
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="user" />
+                            </f:facet>
+                            </b:inputText>
+                            <p:watermark for="TxtLogin" value="Login" id="watermark" />
+                        </p:column >
+                    </p:row>
+                    <!-- PW -->
+                    <p:row>
+                        <p:column style="background-color: #EEE !important;" >
+                            <b:inputSecret id="TxtPw"
+                                         value="#{IdentificationController.password}"
+                                         required="true">
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="key" />
+                            </f:facet>
+                            </b:inputSecret>
+                            <p:watermark for="TxtPw" value="Mot de passe" id="watermark2" />
+                        </p:column >
+                    </p:row>
+                    <!-- BOUTON  -->
+                    <p:row>
+                        <p:column style="text-align:center; background-color: #EEE !important;">
+                            <b:commandButton value="Se connecter" id="BLImg" ajax="false" look="primary"  style="width:100%;"
+                               action="#{IdentificationController.identify}"/>
+                        </p:column >
+                    </p:row>
+        </p:panelGrid>
+        </h:form>
+        <h:form id="form2" style="width:100%;" rendered="#{!IdentificationController.session}">
+            <center>
+                <p> vous êtes déjà connecté en tant que <span style="color:green">#{IdentificationController.login}</span> veuillez cliquer sur le button plus bas pour être redirigé </p>
+            <br />
+            <b:commandButton look="primary" ajax="false" action="index.xhtml" value="Redirection vers ListGenerator"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
