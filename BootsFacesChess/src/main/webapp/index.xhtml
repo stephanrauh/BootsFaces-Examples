@@ -41,7 +41,7 @@
       <b:row>
         <b:column span="8">
           <script>targets='#{board.legalTargets}';</script>
-          <b:panel title="#{board.title}" id="board" look="info"
+          <b:panel title="#{board.title}" id="board" look="primary"
             contentStyle="height:580px">
             <ui:repeat id="rows" var="row" value="#{board.rows}"
               varStatus="rowStatus">
@@ -61,17 +61,9 @@
                       ondragstart="ajax:board.ondragstart(rowStatus.index,columnStatus.index)"
                       ondragover="if (targets.indexOf('(#{rowStatus.index},#{columnStatus.index})')>=0) event.preventDefault();"
                       ondrop="ajax:board.ondragdrop(rowStatus.index,columnStatus.index)"
-                      update="@form :messages" />
+                      update="@form :messages"
+                      process="@form" />
                   </div>
-
-
-                  <ui:remove>
-                    <b:image value="#{image}"
-                      style="width:68px;height:68px;display:inline-block;#{board.getOpacityAndBorder(rowStatus.index,columnStatus.index)}"
-                      onclick="ajax:board.onclick(rowStatus.index,columnStatus.index)"
-                      oncomplete="document.getElementById('form:opponent').click()"
-                      update="@form :messages" />
-                  </ui:remove>
                 </ui:repeat>
                 <ui:remove>
                 <b:image value="wikimediaimages/s_s_turm_frei.png"
@@ -83,7 +75,7 @@
         </b:column>
         <b:column span="4">
           <b:panel title="History" contentStyle="height:220px"
-            look="info">
+            look="primary">
             <b:panelGrid id="historyGrid" colSpans="5,7"
               style="width:300px;height:200px;overflow-y: auto;overflow-x:hidden">
               <c:forEach items="#{board.history}" var="move">
@@ -96,7 +88,7 @@
 													grid.scrollTop = grid.scrollHeight;
 												</script>
           </b:panel>
-          <b:panel look="info"
+          <b:panel look="primary"
             title="Settings #{settings.economyMode?' (restricted to save CPU time)':''}"
             contentStyle="height:140px">
             <b:panelGrid colSpans="6,6">
@@ -111,7 +103,7 @@
           </b:panel>
 
           <b:panel title="statistics" contentStyle="height:100px"
-            look="info">
+            look="success">
             <b:panelGrid colSpans="6,6">
               <h:outputText value="Elapsed time:" />
               <h:outputText value="#{board.elapsedTime}" />

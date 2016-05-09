@@ -12,6 +12,10 @@
     <param-name>BootsFaces_USETHEME</param-name>
     <param-value>true</param-value>
   </context-param>
+  <context-param>
+    <param-name>BootsFaces_THEME</param-name>
+    <param-value>default</param-value>
+  </context-param>
   <welcome-file-list>
     <welcome-file>index.jsf</welcome-file>
   </welcome-file-list>
