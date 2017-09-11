@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:b="http://bootsfaces.net/ui"
+  xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+  <title>Lunch</title>
+  <meta name="sbi" content="Stefan Billeb"></meta>
+  <meta name="rau" content="Stephan Rauh"></meta>
+  <h:outputStylesheet name="lunch.css" />
+</h:head>
+<h:body style="padding: 60px;">
+  <ui:include src="topMenu.xhtml" />
+  <b:container>
+    <b:row>
+      <b:column span="2">
+        <h:form>
+          <b:flyOutMenu>
+            <b:navLink value="Lunch" icon="globe" iconAlign="right" update="@(.content)"
+              onclick="ajax:navigationBean.setPage('start.xhtml')" />
+            <b:dropMenu value="Users">
+              <b:navLink value="Register yourself" update="@(.content)"
+                onclick="ajax:navigationBean.setPage('register.xhtml')" />
+              <b:navLink value="Users" update="@(.content)" onclick="ajax:navigationBean.setPage('users.xhtml')" />
+            </b:dropMenu>
+            <b:navLink />
+            <b:dropMenu value="Administration">
+              <b:navLink value="Delivery Services" update="@(.content)"
+                onclick="ajax:navigationBean.setPage('deliveryServices.xhtml')" />
+              <b:navLink value="Users (AJAX)" update="@(.content)" onclick="ajax:navigationBean.setPage('users.xhtml')" />
+            </b:dropMenu>
+          </b:flyOutMenu>
+        </h:form>
+      </b:column>
+      <b:column span="10" class="content">
+        <ui:include src="#{navigationBean.page}" />
+      </b:column>
+    </b:row>
+  </b:container>
+  <!-- The following pages are not rendered, but they are needed to make sure every required JavaScript file is loaded in time. -->
+  <h:panelGroup rendered="false">
+    <ui:include src="deliveryServices.xhtml" />
+    <ui:include src="register.xhtml" />
+  </h:panelGroup>
+</h:body>
+</html>

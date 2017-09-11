@@ -1,0 +1,9 @@
+.dataTables_length {
+	display:inline;
+}
+
+.dataTables_filter {
+	display:inline;
+	position:absolute;
+	right:30px;
+}

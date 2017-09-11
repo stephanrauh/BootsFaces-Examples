@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:b="http://bootsfaces.net/ui" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+
+  <h:form>
+    <b:panel title="Users" look="primary">
+      <b:row>
+        <b:column span="4">
+          <b:inputText value="#{userBean.filter.name}" label="Filter (name) " inline="true" renderLabel="true" />
+        </b:column>
+        <b:column span="2">
+          <b:commandButton value="Filter" onclick="ajax:userBean.filter()" update="@form" />
+        </b:column>
+      </b:row>
+      <b:dataTable value="#{userBean.users}" var="user">
+        <h:column label="Name">
+          <b:inputText value="#{user.name}" inline="true" size="30" />
+        </h:column>
+        <h:column>
+          <b:inputText value="#{user.email}" inline="true" size="85" label="email" render-label="false" />
+        </h:column>
+      </b:dataTable>
+    </b:panel>
+  </h:form>
+</ui:fragment>
